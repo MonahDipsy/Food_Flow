@@ -166,7 +166,7 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
 }
 @Composable
 
-fun CheckBoxComponents(value: String){
+fun CheckBoxComponents(value: String, onTextSelected: (String) -> Unit){
    Row(
        modifier = Modifier
            .fillMaxWidth()
@@ -182,18 +182,18 @@ fun CheckBoxComponents(value: String){
                 onCheckedChange = {
                     checkedState.value = !checkedState.value
                 })
-       ClickableTextComponent(value = value)
+       ClickableTextComponent(value = value, onTextSelected)
    }
 }
 
 @Composable
-fun ClickableTextComponent(value: String) {
-    val annotatedString = buildAnnotatedString {
-        val initialText = "By continuing you accept our "
-        val privacyPolicyText = "Privacy Policy "
-        val andText = "and "
-        val termsAndConditionsText = "Terms of Use"
+fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
+    val initialText = "By continuing you accept our "
+    val privacyPolicyText = "Privacy Policy"
+    val andText = " and "
+    val termsAndConditionsText = "Terms of Use"
 
+    val annotatedString = buildAnnotatedString {
         append(initialText)
         withStyle(style = SpanStyle(color = Primary)) {
             pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
@@ -207,11 +207,15 @@ fun ClickableTextComponent(value: String) {
     }
 
     ClickableText(text = annotatedString, onClick = { offset ->
+
         annotatedString.getStringAnnotations(offset, offset)
             .firstOrNull()?.also { span ->
-                Log.d("ClickableTextComponent", "{$span}")
+                Log.d("ClickableTextComponent", "{${span.item}}")
 
-               // if (span.item)
+                if ((span.item == termsAndConditionsText) || (span.item == privacyPolicyText)) {
+                    onTextSelected(span.item)
+                }
             }
+
     })
 }

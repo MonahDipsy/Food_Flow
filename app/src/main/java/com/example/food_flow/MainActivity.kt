@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.food_flow.app.FoodDonationApp
 import com.example.food_flow.screens.SignUpScreen
+import com.example.food_flow.screens.TermsAndConditionsScreen
 import com.example.food_flow.ui.theme.Food_FlowTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,7 +20,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FoodDonationApp()
-            SignUpScreen()
 
         }
     }

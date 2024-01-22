@@ -20,6 +20,8 @@ import com.example.food_flow.components.HeadingTextComponent
 import com.example.food_flow.components.MyTextField
 import com.example.food_flow.components.NormalTextComponent
 import com.example.food_flow.components.PasswordTextField
+import com.example.food_flow.navigation.Food_FlowAppRouter
+import com.example.food_flow.navigation.Screen
 
 @Composable
 
@@ -29,6 +31,7 @@ fun SignUpScreen(){
             .fillMaxSize()
             .background(Color.White)
             .padding(28.dp)
+
     ){
     Column(modifier = Modifier.fillMaxSize()){
         NormalTextComponent(value = stringResource(id = R.string.hello) )
@@ -50,7 +53,11 @@ fun SignUpScreen(){
             labelValue = stringResource(id = R.string.password),
             painterResource = painterResource(id = R.drawable.lock)
         )
-        CheckBoxComponents(value = stringResource(id = R.string.terms_and_conditions))
+        CheckBoxComponents(value = stringResource(id = R.string.terms_and_conditions),
+            onTextSelected = {
+                Food_FlowAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
+
+            } )
 
 
       }
