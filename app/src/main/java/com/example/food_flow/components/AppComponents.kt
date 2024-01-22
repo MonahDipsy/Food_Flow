@@ -1,5 +1,6 @@
 package com.example.food_flow.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,10 +35,18 @@ import com.example.food_flow.ui.theme.TextColor
 import com.example.food_flow.ui.theme.ComponentShapes
 import com.example.food_flow.R
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.IconButton
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.withStyle
 
 
 @Composable
@@ -155,4 +164,54 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
         },
         visualTransformation = if(passwordVisibility.value) VisualTransformation.None else PasswordVisualTransformation())
 }
+@Composable
 
+fun CheckBoxComponents(value: String){
+   Row(
+       modifier = Modifier
+           .fillMaxWidth()
+           .padding(16.dp)
+           .heightIn(56.dp),
+       verticalAlignment = Alignment.CenterVertically,
+
+   ){
+       val checkedState = remember {
+           mutableStateOf(false)
+       }
+       Checkbox(checked = checkedState.value,
+                onCheckedChange = {
+                    checkedState.value = !checkedState.value
+                })
+       ClickableTextComponent(value = value)
+   }
+}
+
+@Composable
+fun ClickableTextComponent(value: String) {
+    val annotatedString = buildAnnotatedString {
+        val initialText = "By continuing you accept our "
+        val privacyPolicyText = "Privacy Policy "
+        val andText = "and "
+        val termsAndConditionsText = "Terms of Use"
+
+        append(initialText)
+        withStyle(style = SpanStyle(color = Primary)) {
+            pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
+            append(privacyPolicyText)
+        }
+        append(andText)
+        withStyle(style = SpanStyle(color = Primary)) {
+            pushStringAnnotation(tag = termsAndConditionsText, annotation = termsAndConditionsText)
+            append(termsAndConditionsText)
+        }
+    }
+
+    ClickableText(text = annotatedString, onClick = { offset ->
+        annotatedString.getStringAnnotations(offset, offset)
+            .firstOrNull()?.also { span ->
+                Log.d("ClickableTextComponent", "{$span}")
+
+               // if (span.item)
+            }
+    })
+}

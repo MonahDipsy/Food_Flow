@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.food_flow.R
+import com.example.food_flow.components.CheckBoxComponents
 import com.example.food_flow.components.HeadingTextComponent
 import com.example.food_flow.components.MyTextField
 import com.example.food_flow.components.NormalTextComponent
@@ -49,6 +50,7 @@ fun SignUpScreen(){
             labelValue = stringResource(id = R.string.password),
             painterResource = painterResource(id = R.drawable.lock)
         )
+        CheckBoxComponents(value = stringResource(id = R.string.terms_and_conditions))
 
 
       }
