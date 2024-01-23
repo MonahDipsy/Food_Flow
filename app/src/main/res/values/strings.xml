@@ -12,4 +12,7 @@
     <string name="terms_and_conditions">By continuing you accept our Privacy Policy and Terms of Use</string>
     <string name="terms_and_conditions_heading">Terms Of Use</string>
     <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="go_to">Already have an account? Login</string>
 </resources>

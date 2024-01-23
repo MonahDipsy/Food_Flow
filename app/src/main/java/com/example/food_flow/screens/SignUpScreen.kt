@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import com.example.food_flow.R
 import com.example.food_flow.components.ButtonComponent
 import com.example.food_flow.components.CheckBoxComponents
+import com.example.food_flow.components.ClickableLoginTextComponent
+import com.example.food_flow.components.DividerTextComponent
 import com.example.food_flow.components.HeadingTextComponent
 import com.example.food_flow.components.MyTextField
 import com.example.food_flow.components.NormalTextComponent
@@ -59,8 +61,17 @@ fun SignUpScreen(){
                 Food_FlowAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
 
             } )
-        Spacer(modifier = Modifier.heightIn(80.dp))
+        Spacer(modifier = Modifier.heightIn(40.dp))
+
         ButtonComponent(value = stringResource(id = R.string.register))
+
+        Spacer(modifier = Modifier.heightIn(20.dp))
+
+        DividerTextComponent()
+
+        ClickableLoginTextComponent(onTextSelected = {
+
+        })
 
 
       }
