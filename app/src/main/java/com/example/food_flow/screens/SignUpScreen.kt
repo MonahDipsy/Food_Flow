@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.food_flow.R
+import com.example.food_flow.components.ButtonComponent
 import com.example.food_flow.components.CheckBoxComponents
 import com.example.food_flow.components.HeadingTextComponent
 import com.example.food_flow.components.MyTextField
@@ -58,6 +59,8 @@ fun SignUpScreen(){
                 Food_FlowAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
 
             } )
+        Spacer(modifier = Modifier.heightIn(80.dp))
+        ButtonComponent(value = stringResource(id = R.string.register))
 
 
       }
