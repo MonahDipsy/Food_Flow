@@ -2,7 +2,7 @@
     <string name="app_name">Food_Flow</string>
     <string name="hello">Hey there!</string>
     <string name="heading">Create an Account</string>
-    <string name="welcome">Welcome Back</string>
+    <string name="welcome">Welcome Back!</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="email">Email</string>
