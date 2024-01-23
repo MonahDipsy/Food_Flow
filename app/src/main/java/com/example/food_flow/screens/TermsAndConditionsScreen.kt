@@ -12,6 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.food_flow.R
 import com.example.food_flow.components.HeadingTextComponent
+import com.example.food_flow.navigation.Food_FlowAppRouter
+import com.example.food_flow.navigation.Screen
+import com.example.food_flow.navigation.SystemBackButtonHandler
 
 @Composable
 
@@ -22,6 +25,11 @@ fun TermsAndConditionsScreen(){
         .padding(16.dp)){
         
         HeadingTextComponent(value = stringResource(id = R.string.terms_and_conditions_heading))
+    }
+
+    SystemBackButtonHandler {
+        Food_FlowAppRouter.navigateTo(Screen.SignUpScreen)
+
     }
 
 }
