@@ -50,6 +50,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -314,4 +315,21 @@ fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
             }
 
     })
+}
+
+@Composable
+fun UnderlinedTextComponent(value:String){
+    Text(text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal
+        )
+        , color = colorResource(id = R.color.colorGray),
+        textAlign = TextAlign.Center
+    )
+
 }
