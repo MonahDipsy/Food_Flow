@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
+import com.example.food_flow.screens.LoginScreen
 import com.example.food_flow.screens.SignUpScreen
 import com.example.food_flow.screens.TermsAndConditionsScreen
 @Composable
@@ -23,6 +24,10 @@ fun FoodDonationApp() {
                 }
                 is Screen.TermsAndConditionsScreen -> {
                     TermsAndConditionsScreen()
+                }
+
+                is Screen.LoginScreen -> {
+                    LoginScreen()
                 }
             }
         }

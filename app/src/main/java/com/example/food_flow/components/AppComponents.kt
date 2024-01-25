@@ -55,6 +55,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import com.example.food_flow.ui.theme.Secondary
 
@@ -281,9 +282,9 @@ fun DividerTextComponent(){
     }
 }
 @Composable
-fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
-    val initialText = "Already have an account? "
-    val loginText = "Login"
+fun ClickableLoginTextComponent(tryingToLogin:Boolean = true, onTextSelected: (String) -> Unit) {
+    val initialText = if(tryingToLogin) "Already have an account? " else "Don't have an account yet? "
+    val loginText = if(tryingToLogin)"Login" else "Register"
 
     val annotatedString = buildAnnotatedString {
         append(initialText)
@@ -324,12 +325,15 @@ fun UnderlinedTextComponent(value:String){
             .fillMaxWidth()
             .heightIn(min = 40.dp),
         style = TextStyle(
-            fontSize = 24.sp,
+            fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             fontStyle = FontStyle.Normal
         )
         , color = colorResource(id = R.color.colorGray),
-        textAlign = TextAlign.Center
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+
     )
 
 }
+

@@ -61,7 +61,7 @@ fun SignUpScreen(){
                 Food_FlowAppRouter.navigateTo(Screen.TermsAndConditionsScreen)
 
             } )
-        Spacer(modifier = Modifier.heightIn(40.dp))
+        Spacer(modifier = Modifier.heightIn(15.dp))
 
         ButtonComponent(value = stringResource(id = R.string.register))
 
@@ -69,7 +69,8 @@ fun SignUpScreen(){
 
         DividerTextComponent()
 
-        ClickableLoginTextComponent(onTextSelected = {
+        ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
+            Food_FlowAppRouter.navigateTo(Screen.LoginScreen)
 
         })
 
