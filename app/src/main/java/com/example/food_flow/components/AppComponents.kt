@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
@@ -113,14 +114,16 @@ fun MyTextField(labelValue: String, painterResource: Painter) {
             focusedBorderColor = Primary,
             focusedLabelColor = Primary,
         ),
-        keyboardActions = KeyboardActions.Default,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        singleLine = true,
+        maxLines = 1,
         value = textValue.value,
         onValueChange = {
             textValue.value = it
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
-        }
+        },
     )
 }
 
@@ -146,7 +149,7 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
             focusedBorderColor = Primary,
             focusedLabelColor = Primary,
         ),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
                 value = password.value,
         onValueChange = {
             password.value = it
