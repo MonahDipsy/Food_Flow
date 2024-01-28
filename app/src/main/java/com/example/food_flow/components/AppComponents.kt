@@ -50,6 +50,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -129,6 +130,7 @@ fun MyTextField(labelValue: String, painterResource: Painter) {
 
 @Composable
 fun PasswordTextField(labelValue: String, painterResource: Painter) {
+    val localFocusManger = LocalFocusManager.current
 
     val password = remember {
         mutableStateOf("")
@@ -150,6 +152,11 @@ fun PasswordTextField(labelValue: String, painterResource: Painter) {
             focusedLabelColor = Primary,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+        singleLine = true,
+        keyboardActions = KeyboardActions{
+                                         localFocusManger.clearFocus()
+        },
+        maxLines = 1,
                 value = password.value,
         onValueChange = {
             password.value = it

@@ -21,6 +21,7 @@ import com.example.food_flow.components.DividerTextComponent
 import com.example.food_flow.components.HeadingTextComponent
 import com.example.food_flow.components.MyTextField
 import com.example.food_flow.components.NormalTextComponent
+import com.example.food_flow.components.PasswordTextField
 import com.example.food_flow.components.UnderlinedTextComponent
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
@@ -44,7 +45,7 @@ fun LoginScreen(){
                         painterResource(id =R.drawable.email)  )
 
 
-            MyTextField(labelValue = stringResource(id = R.string.password),
+            PasswordTextField(labelValue = stringResource(id = R.string.password),
                 painterResource(id =R.drawable.lock)  )
 
             Spacer(modifier = Modifier.heightIn(40.dp))
