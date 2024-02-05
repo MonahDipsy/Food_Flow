@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783862774185",
+    "project_id": "foodflowapp-fd6b8",
+    "storage_bucket": "foodflowapp-fd6b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783862774185:android:d986b96f0fe79961442cb8",
+        "android_client_info": {
+          "package_name": "com.example.food_flow"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHXhka2H0fUdqAa1UGdCuHkN5nsY6Re3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,10 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.food_flow.app.FoodDonationApp
-import com.example.food_flow.screens.LoginScreen
-import com.example.food_flow.screens.SignUpScreen
-import com.example.food_flow.screens.TermsAndConditionsScreen
-import com.example.food_flow.ui.theme.Food_FlowTheme
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,4 +23,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+@Preview
+@Composable
+fun DefaultPreview(){
+    FoodDonationApp()
+}

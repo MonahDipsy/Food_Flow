@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 private val LocalBackPressedDispatcher =
     staticCompositionLocalOf<OnBackPressedDispatcherOwner?> { null }
 
+
 private class ComposableBackNavigationHandler(enabled: Boolean) : OnBackPressedCallback(enabled) {
     lateinit var onBackPressed: () -> Unit
 
@@ -22,6 +23,7 @@ private class ComposableBackNavigationHandler(enabled: Boolean) : OnBackPressedC
     }
 
 }
+
 
 @Composable
 internal fun ComposableHandler(
@@ -44,6 +46,7 @@ internal fun ComposableHandler(
         handler.onBackPressed = onBackPressed
     }
 }
+
 @Composable
 internal fun SystemBackButtonHandler(onBackPressed: () -> Unit) {
     CompositionLocalProvider(

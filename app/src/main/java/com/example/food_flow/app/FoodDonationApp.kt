@@ -12,21 +12,33 @@ import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import com.example.food_flow.screens.LoginScreen
 import com.example.food_flow.screens.SignUpScreen
+import com.example.food_flow.screens.HomeScreen
 import com.example.food_flow.screens.TermsAndConditionsScreen
+import com.example.food_flow.screens.SplashScreen
+
 @Composable
 fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
+    // Assuming checkForActiveSession is responsible for checking the user's login status
     homeViewModel.checkForActiveSession()
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.White
-    ) {if (homeViewModel.isUserLoggedIn.value == true) {
-        Food_FlowAppRouter.navigateTo(Screen.HomeScreen)
-    }
-        Crossfade(targetState = Food_FlowAppRouter.currentScreen, label = "") { currentState ->
+
+    // Navigate to SplashScreen when the app starts
+    Food_FlowAppRouter.navigateTo(Screen.SplashScreen)
+
+    // Use a Crossfade to transition between screens
+    Crossfade(targetState = Food_FlowAppRouter.currentScreen) { currentState ->
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Color.White
+        ) {
             when (currentState.value) {
+                is Screen.SplashScreen -> {
+                    SplashScreen()
+                }
+
                 is Screen.SignUpScreen -> {
                     SignUpScreen()
                 }
+
                 is Screen.TermsAndConditionsScreen -> {
                     TermsAndConditionsScreen()
                 }
@@ -35,9 +47,10 @@ fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
                     LoginScreen()
                 }
 
-                else -> {""}
+                is Screen.HomeScreen -> {
+                    HomeScreen()
+                }
             }
         }
     }
 }
-

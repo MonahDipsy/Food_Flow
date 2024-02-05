@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 
 sealed class Screen {
 
+
+    object SplashScreen : Screen()
     object SignUpScreen : Screen()
     object TermsAndConditionsScreen : Screen()
     object LoginScreen : Screen ()
@@ -15,7 +17,7 @@ sealed class Screen {
 
 object Food_FlowAppRouter {
 
-    var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SignUpScreen)
+    var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SplashScreen)
 
     fun navigateTo(destination : Screen){
         currentScreen.value = destination

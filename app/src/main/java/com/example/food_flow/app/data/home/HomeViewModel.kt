@@ -48,7 +48,7 @@ class HomeViewModel : ViewModel() {
 
         val authStateListener = FirebaseAuth.AuthStateListener {
             if (it.currentUser == null) {
-                Log.d(TAG, "Inside sign outsuccess")
+                Log.d(TAG, "Inside sign out success")
                 Food_FlowAppRouter.navigateTo(Screen.LoginScreen)
             } else {
                 Log.d(TAG, "Inside sign out is not complete")

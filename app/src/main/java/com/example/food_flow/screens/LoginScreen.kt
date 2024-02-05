@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,38 +36,49 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+
         Surface(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(28.dp)
-
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
-                NormalTextComponent(value = stringResource(id = R.string.hello))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+
+                NormalTextComponent(value = stringResource(id = R.string.login))
                 HeadingTextComponent(value = stringResource(id = R.string.welcome))
-                Spacer(modifier = Modifier.heightIn(18.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                MyTextField(
-                    labelValue = stringResource(id = R.string.email),
-                    painterResource(id = R.drawable.email)
+                MyTextField(labelValue = stringResource(id = R.string.email),
+                    painterResource(id = R.drawable.email),
+                    onTextChanged = {
+                        loginViewModel.onEvent(LoginUIEvent.EmailChanged(it))
+                    },
+                    errorStatus = loginViewModel.loginUIState.value.emailError
                 )
-
 
                 PasswordTextField(
                     labelValue = stringResource(id = R.string.password),
-                    painterResource(id = R.drawable.lock)
+                    painterResource(id = R.drawable.lock),
+                    onTextSelected = {
+                        loginViewModel.onEvent(LoginUIEvent.PasswordChanged(it))
+                    },
+                    errorStatus = loginViewModel.loginUIState.value.passwordError
                 )
 
-                Spacer(modifier = Modifier.heightIn(40.dp))
-
+                Spacer(modifier = Modifier.height(40.dp))
                 UnderlinedTextComponent(value = stringResource(id = R.string.forgot_password))
 
-                Spacer(modifier = Modifier.heightIn(35.dp))
+                Spacer(modifier = Modifier.height(40.dp))
 
                 ButtonComponent(
                     value = stringResource(id = R.string.login),
@@ -75,28 +88,29 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     isEnabled = loginViewModel.allValidationsPassed.value
                 )
 
-                Spacer(modifier = Modifier.heightIn(25.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 DividerTextComponent()
 
                 ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
                     Food_FlowAppRouter.navigateTo(Screen.SignUpScreen)
-
                 })
-
             }
         }
 
-        SystemBackButtonHandler {
-            Food_FlowAppRouter.navigateTo(Screen.SignUpScreen)
+        if(loginViewModel.loginInProgress.value) {
+            CircularProgressIndicator()
         }
+    }
 
+
+    SystemBackButtonHandler {
+        Food_FlowAppRouter.navigateTo(Screen.SplashScreen)
     }
 }
 
 @Preview
-
 @Composable
-fun LoginScreenPreview(){
+fun LoginScreenPreview() {
     LoginScreen()
 }

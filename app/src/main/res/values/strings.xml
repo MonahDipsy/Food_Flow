@@ -16,4 +16,74 @@
     <string name="or">or</string>
     <string name="go_to">Already have an account? Login</string>
     <string name="forgot_password">Forgot your password?</string>
+    <string name="clickTocContinue">Click here to Continue</string>
+    <string name="TermsAndCs">
+Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App
+Privacy Policy:
+
+Introduction:
+
+Welcome to FoodFlow, a food donations and redistribution tracking app! We take your privacy seriously and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our app.
+
+Information We Collect:
+
+Personal Information: When you sign up, we may collect information such as your name, email address, phone number, location (city, state), and profile picture. We may also collect information about your preferences and how you use the app.
+Usage Data: We automatically collect information about your activity on the app, such as the screens you visit, the time you spend on each screen, and the actions you take.
+How We Use Your Information:
+
+To provide and improve the app and its features.
+To communicate with you about your account and the app.
+To personalize your experience.
+To analyze usage data to understand how people use the app and improve it.
+To comply with legal and regulatory requirements.
+Sharing Your Information:
+
+We will not share your personal information with third parties without your consent, except:
+With service providers who help us operate the app, such as cloud storage providers.
+If required by law.
+Data Security:
+
+We take steps to protect your information from unauthorized access, use, disclosure, alteration, or destruction.
+However, no security measures are perfect, and we cannot guarantee the security of your information.
+Your Choices:
+
+You can access, update, or delete your personal information through your account settings.
+You can unsubscribe from promotional emails at any time.
+Contact Us:
+
+If you have any questions about this Privacy Policy, please contact us at [email protected]
+
+Terms of Use:
+
+Welcome:
+
+These Terms of Use govern your use of the FoodFlow app. By using the app, you agree to these terms.
+
+Acceptable Use:
+
+You may use the app for its intended purpose of donating and redistributing food.
+You agree not to use the app for any illegal or harmful activity.
+User Content:
+
+You are responsible for any content you submit to the app.
+You grant us a non-exclusive, royalty-free license to use your content for app operation and improvement.
+Disclaimers:
+
+We make no warranties about the accuracy, completeness, or reliability of the app or its content.
+You use the app at your own risk.
+Limitation of Liability:
+
+We are not liable for any damages arising from your use of the app.
+Termination:
+
+We may terminate your account at any time for any reason.
+Changes to These Terms:
+
+We may modify these terms at any time.
+Entire Agreement:
+
+These terms constitute the entire agreement between you and us regarding your use of the app.
+Contact Us:
+
+If you have any questions about these Terms of Use, please contact us at [email protected]</string>
 </resources>

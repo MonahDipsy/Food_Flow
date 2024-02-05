@@ -4,23 +4,39 @@ import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.example.food_flow.app.data.RegistrationUIState
 import com.example.food_flow.app.data.rules.Validator
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 
-
-
 class SignupViewModel : ViewModel() {
 
     private val TAG = SignupViewModel::class.simpleName
 
+    private val authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+        val user = firebaseAuth.currentUser
+        if (user != null) {
+            // User is signed in
+            Log.d(TAG, "User is signed in: ${user.email}")
+        } else {
+            // User is signed out
+            Log.d(TAG, "User is signed out")
+        }
+    }
+
+    init {
+        // Add the AuthStateListener when the ViewModel is initialized
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        // Remove the AuthStateListener when the ViewModel is cleared
+        FirebaseAuth.getInstance().removeAuthStateListener(authStateListener)
+    }
 
     var registrationUIState = mutableStateOf(RegistrationUIState())
-
     var allValidationsPassed = mutableStateOf(false)
-
     var signUpInProgress = mutableStateOf(false)
 
     fun onEvent(event: SignupUIEvent) {
@@ -47,7 +63,6 @@ class SignupViewModel : ViewModel() {
 
             }
 
-
             is SignupUIEvent.PasswordChanged -> {
                 registrationUIState.value = registrationUIState.value.copy(
                     password = event.password
@@ -68,7 +83,6 @@ class SignupViewModel : ViewModel() {
         }
         validateDataWithRules()
     }
-
 
     private fun signUp() {
         Log.d(TAG, "Inside_signUp")
@@ -92,7 +106,6 @@ class SignupViewModel : ViewModel() {
             email = registrationUIState.value.email
         )
 
-
         val passwordResult = Validator.validatePassword(
             password = registrationUIState.value.password
         )
@@ -100,7 +113,6 @@ class SignupViewModel : ViewModel() {
         val privacyPolicyResult = Validator.validatePrivacyPolicyAcceptance(
             statusValue = registrationUIState.value.privacyPolicyAccepted
         )
-
 
         Log.d(TAG, "Inside_validateDataWithRules")
         Log.d(TAG, "fNameResult= $fNameResult")
@@ -117,41 +129,34 @@ class SignupViewModel : ViewModel() {
             privacyPolicyError = privacyPolicyResult.status
         )
 
-
         allValidationsPassed.value = fNameResult.status && lNameResult.status &&
                 emailResult.status && passwordResult.status && privacyPolicyResult.status
-
     }
-
 
     private fun printState() {
         Log.d(TAG, "Inside_printState")
         Log.d(TAG, registrationUIState.value.toString())
     }
 
-
     private fun createUserInFirebase(email: String, password: String) {
-
         signUpInProgress.value = true
 
-        FirebaseAuth
-            .getInstance()
-            .createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
                 Log.d(TAG, "Inside_OnCompleteListener")
-                Log.d(TAG, " isSuccessful = ${it.isSuccessful}")
-
-                signUpInProgress.value = false
-                if (it.isSuccessful) {
+                if (task.isSuccessful) {
+                    Log.d(TAG, "User creation success: ${task.result?.user?.uid}")
+                    signUpInProgress.value = false
                     Food_FlowAppRouter.navigateTo(Screen.HomeScreen)
+                } else {
+                    Log.d(TAG, "User creation failed: ${task.exception?.message}")
+                    signUpInProgress.value = false
                 }
             }
-            .addOnFailureListener {
+            .addOnFailureListener { exception ->
                 Log.d(TAG, "Inside_OnFailureListener")
-                Log.d(TAG, "Exception= ${it.message}")
-                Log.d(TAG, "Exception= ${it.localizedMessage}")
+                Log.d(TAG, "Exception= ${exception.message}")
+                Log.d(TAG, "Exception= ${exception.localizedMessage}")
             }
     }
-
-
 }
