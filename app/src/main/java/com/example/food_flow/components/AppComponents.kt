@@ -47,6 +47,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
+import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -240,9 +241,11 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 }
 
 @Composable
-fun ButtonComponent(value: String){
+fun ButtonComponent(value: String , onButtonClicked : () -> Unit , isEnabled : Boolean = false){
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+                  onButtonClicked.invoke()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),
@@ -255,8 +258,11 @@ fun ButtonComponent(value: String){
                 .heightIn(48.dp)
                 .background(
                     brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
-                    shape = RoundedCornerShape(50.dp)
-                ),
+                    shape = RoundedCornerShape(50.dp),
+                )
+                .clickable (enabled = isEnabled){
+
+                },
             contentAlignment = Alignment.Center
         ){
             Text(text = value,
