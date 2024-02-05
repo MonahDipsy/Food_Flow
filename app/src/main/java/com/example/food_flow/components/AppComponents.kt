@@ -243,14 +243,15 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 @Composable
 fun ButtonComponent(value: String , onButtonClicked : () -> Unit , isEnabled : Boolean = false){
     Button(
-        onClick = {
-                  onButtonClicked.invoke()
-        },
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),
+        onClick = {
+            onButtonClicked.invoke()
+        },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent)
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        enabled = isEnabled
     ) {
         Box(
             modifier = Modifier
@@ -259,10 +260,7 @@ fun ButtonComponent(value: String , onButtonClicked : () -> Unit , isEnabled : B
                 .background(
                     brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
                     shape = RoundedCornerShape(50.dp),
-                )
-                .clickable (enabled = isEnabled){
-
-                },
+                ),
             contentAlignment = Alignment.Center
         ){
             Text(text = value,
