@@ -38,6 +38,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -46,7 +47,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // First row
+            Spacer(modifier = Modifier.height(95.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -86,7 +87,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                 }
             }
 
-            // Second row
+            Spacer(modifier = Modifier.height(30.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
