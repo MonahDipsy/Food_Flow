@@ -79,6 +79,22 @@ fun NormalTextComponent(value: String) {
         textAlign = TextAlign.Center
     )
 }
+@Composable
+fun SplashTextComponent(value: String) {
+    Text(
+        text = value,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Italic,
+            color = Color.Gray
+        ), color = colorResource(id = R.color.colorText),
+        textAlign = TextAlign.Center
+    )
+}
 
 @Composable
 fun HeadingTextComponent(value: String) {

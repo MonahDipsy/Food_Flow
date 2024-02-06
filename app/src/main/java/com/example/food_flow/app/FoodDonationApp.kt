@@ -15,16 +15,21 @@ import com.example.food_flow.screens.SignUpScreen
 import com.example.food_flow.screens.HomeScreen
 import com.example.food_flow.screens.TermsAndConditionsScreen
 import com.example.food_flow.screens.SplashScreen
+import com.example.food_flow.screens.DonateScreen
+import com.example.food_flow.screens.FoodBankScreen
+import com.example.food_flow.screens.ReceiveScreen
+import com.example.food_flow.screens.FoodMapScreen
+
 
 @Composable
 fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
-    // Assuming checkForActiveSession is responsible for checking the user's login status
+
     homeViewModel.checkForActiveSession()
 
-    // Navigate to SplashScreen when the app starts
+
     Food_FlowAppRouter.navigateTo(Screen.SplashScreen)
 
-    // Use a Crossfade to transition between screens
+
     Crossfade(targetState = Food_FlowAppRouter.currentScreen) { currentState ->
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -49,6 +54,23 @@ fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
 
                 is Screen.HomeScreen -> {
                     HomeScreen()
+                }
+
+                is Screen.DonateScreen -> {
+                    DonateScreen()
+                }
+
+                is Screen.ReceiveScreen -> {
+                    ReceiveScreen()
+                }
+
+                is Screen.FoodBankScreen -> {
+                    FoodBankScreen()
+                }
+
+                is Screen.FoodMapScreen -> {
+                    FoodMapScreen()
+
                 }
             }
         }

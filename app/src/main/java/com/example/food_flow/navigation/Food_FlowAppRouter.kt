@@ -11,6 +11,10 @@ sealed class Screen {
     object TermsAndConditionsScreen : Screen()
     object LoginScreen : Screen ()
     object HomeScreen :  Screen ()
+    object DonateScreen : Screen ()
+    object FoodBankScreen : Screen ()
+    object ReceiveScreen : Screen ()
+    object FoodMapScreen : Screen ()
 
 }
 

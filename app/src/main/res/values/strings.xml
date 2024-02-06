@@ -16,7 +16,7 @@
     <string name="or">or</string>
     <string name="go_to">Already have an account? Login</string>
     <string name="forgot_password">Forgot your password?</string>
-    <string name="clickTocContinue">Click here to Continue</string>
+    <string name="clickTocContinue">Get Started</string>
     <string name="TermsAndCs">
 Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App
 Privacy Policy:
@@ -86,4 +86,5 @@ These terms constitute the entire agreement between you and us regarding your us
 Contact Us:
 
 If you have any questions about these Terms of Use, please contact us at [email protected]</string>
+    <string name="WelcomeMessage">If you cannot feed a hundered people, then feed one.\nYour Donation counts and can make a difference!</string>
 </resources>
