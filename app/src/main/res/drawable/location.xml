@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group>
+        <!-- Outer Circle -->
+        <path
+            android:pathData="M12,2C8.69,2 6,4.69 6,8c0,4.5 6,14 6,14s6,-9.5 6,-14c0,-3.31 -2.69,-6 -6,-6z"
+            android:fillColor="#4B8EC3"/>
+        <!-- Inner Circle -->
+        <path
+            android:pathData="M12,6.5c-1.93,0 -3.5,1.57 -3.5,3.5s1.57,3.5 3.5,3.5s3.5,-1.57 3.5,-3.5s-1.57,-3.5 -3.5,-3.5z"
+            android:fillColor="#FFF"/>
+    </group>
+</vector>

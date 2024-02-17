@@ -6,15 +6,15 @@ import androidx.compose.runtime.mutableStateOf
 sealed class Screen {
 
 
-    object SplashScreen : Screen()
-    object SignUpScreen : Screen()
-    object TermsAndConditionsScreen : Screen()
-    object LoginScreen : Screen ()
-    object HomeScreen :  Screen ()
-    object DonateScreen : Screen ()
-    object FoodBankScreen : Screen ()
-    object ReceiveScreen : Screen ()
-    object FoodMapScreen : Screen ()
+    data object SplashScreen : Screen()
+    data object SignUpScreen : Screen()
+    data object TermsAndConditionsScreen : Screen()
+    data object LoginScreen : Screen ()
+    data object HomeScreen :  Screen ()
+    data object DonateScreen : Screen ()
+    data object FoodBankScreen : Screen ()
+    data object ReceiveScreen : Screen ()
+    data object FoodMapScreen : Screen ()
 
 }
 

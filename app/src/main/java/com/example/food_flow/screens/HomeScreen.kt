@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -27,17 +28,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.food_flow.R
+import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import com.example.food_flow.navigation.SystemBackButtonHandler
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(signupViewModel: SignupViewModel = viewModel()) {
+    val firstName = signupViewModel.registrationUIState.value.firstName
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +54,15 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Spacer(modifier = Modifier.height(95.dp))
+            Text(
+                text = "Hello $firstName,",
+                modifier = Modifier.padding(16.dp),
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+            )
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -63,7 +78,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.donate_icon), // Replace with your image
+                        painter = painterResource(id = R.drawable.donate),
                         contentDescription = "Donate Food",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -80,7 +95,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.receive_icon), // Replace with your image
+                        painter = painterResource(id = R.drawable.receive), // Replace with your image
                         contentDescription = "Receive Food",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -103,7 +118,7 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.foodbank_icon), // Replace with your image
+                        painter = painterResource(id = R.drawable.bank), // Replace with your image
                         contentDescription = "Find Food Banks",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -120,13 +135,14 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.foodmaps), // Replace with your image
+                        painter = painterResource(id = R.drawable.foodmaps),
                         contentDescription = "View Food Maps",
                         modifier = Modifier.fillMaxSize()
                     )
                 }
             }
         }
+
     }
 
     SystemBackButtonHandler {
@@ -137,6 +153,6 @@ fun HomeScreen(homeViewModel: HomeViewModel = viewModel()) {
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(signupViewModel = SignupViewModel())
 }
 

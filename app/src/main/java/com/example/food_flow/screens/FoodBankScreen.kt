@@ -1,5 +1,8 @@
 package com.example.food_flow.screens
 
-class FoodBankScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun FoodBankScreen(){
 
 }
