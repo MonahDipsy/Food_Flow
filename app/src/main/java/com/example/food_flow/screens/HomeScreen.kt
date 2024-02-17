@@ -95,7 +95,7 @@ fun HomeScreen(signupViewModel: SignupViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.receive), // Replace with your image
+                        painter = painterResource(id = R.drawable.donate), // Replace with your image
                         contentDescription = "Receive Food",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -135,7 +135,7 @@ fun HomeScreen(signupViewModel: SignupViewModel = viewModel()) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.foodmaps),
+                        painter = painterResource(id = R.drawable.donate),
                         contentDescription = "View Food Maps",
                         modifier = Modifier.fillMaxSize()
                     )

@@ -91,4 +91,5 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="DonateWelcome">Donate Food Details</string>
     <string name="Location">Choose Location</string>
     <string name="donationsubmitted">Submit Donation</string>
+    <string name="showSuccessMessage">Donation Successful\n</string>
 </resources>

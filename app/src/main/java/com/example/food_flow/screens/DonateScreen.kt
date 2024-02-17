@@ -1,5 +1,7 @@
 package com.example.food_flow.screens
 
+import DonateViewModel
+import android.widget.ScrollView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -59,11 +62,9 @@ import com.example.food_flow.R
 import com.example.food_flow.app.data.signup.SignupUIEvent
 import com.example.food_flow.components.MyTextField
 import com.example.food_flow.components.NormalTextComponent
-import com.example.food_flow.app.data.homescreen.DonateViewModel
 import com.example.food_flow.app.data.homescreen.DonationUIEvent
 import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.components.ButtonComponent
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,51 +72,14 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
     var selectedCounty by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val counties = listOf(
-        "Baringo",
-        "Bomet",
-        "Bungoma",
-        "Busia",
-        "Elgeyo-Marakwet",
-        "Embu",
-        "Garissa",
-        "Homa Bay",
-        "Isiolo",
-        "Kajiado",
-        "Kakamega",
-        "Kericho",
-        "Kiambu",
-        "Kilifi",
-        "Kirinyaga",
-        "Kisii",
-        "Kisumu",
-        "Kitui",
-        "Kwale",
-        "Laikipia",
-        "Lamu",
-        "Machakos",
-        "Makueni",
-        "Mandera",
-        "Marsabit",
-        "Meru",
-        "Migori",
-        "Mombasa",
-        "Murang'a",
-        "Nairobi",
-        "Nakuru",
-        "Nandi",
-        "Narok",
-        "Nyeri",
-        "Nyamira",
-        "Nyandarua",
-        "Samburu",
-        "Siaya",
-        "Taita-Taveta",
-        "Tharaka-Nithi",
-        "Trans Nzoia",
-        "Turkana",
-        "Uasin Gishu",
-        "Vihiga",
-        "Wajir"
+        "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu",
+        "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho",
+        "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale",
+        "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit",
+        "Meru", "Migori", "Mombasa", "Murang'a", "Nairobi", "Nakuru", "Nandi",
+        "Narok", "Nyeri", "Nyamira", "Nyandarua", "Samburu", "Siaya",
+        "Taita-Taveta", "Tharaka-Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu",
+        "Vihiga", "Wajir"
     )
 
     var locationDetails by remember { mutableStateOf("") }
@@ -135,8 +99,10 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                     estimateText.isNotBlank()
         }
     }
+    var donationSuccessful by remember { mutableStateOf(false) }
 
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
+
 
     Column(
         modifier = Modifier
@@ -147,14 +113,17 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HeadingTextComponent(value = stringResource(id = R.string.DonateWelcome))
-        Spacer(modifier = Modifier.height(20.dp))
+
+        Spacer(modifier = Modifier.height(12.dp))
 
         Column(
+
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.White)
         ) {
             OutlinedTextField(
+
                 value = selectedCounty,
                 onValueChange = { selectedCounty = it },
                 modifier = Modifier
@@ -260,13 +229,13 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
+                modifier = Modifier.padding(8.dp) // Add modifier
             )
-            Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 value = estimateText,
                 onValueChange = { estimateText = it },
-                label = { Text("+254") },
+                label = { Text("+254") }, // Use Text composable for label
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -276,13 +245,23 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                 value = stringResource(id = R.string.donationsubmitted),
                 onButtonClicked = {
                     if (isSubmitEnabled) {
-                        // Handle submission here
-                        // Display success message
                         donateViewModel.onEvent(DonationUIEvent.DonationSubmitted)
+                        donationSuccessful = true
+
+                        selectedCounty = ""
+                        locationDetails = ""
+                        foodText = ""
+                        dateText = ""
+                        timeText = ""
+                        estimateText = ""
                     }
                 },
                 isEnabled = isSubmitEnabled
             )
+
+            if (donationSuccessful) {
+                ShowSuccessMessage()
+            }
         }
     }
 
@@ -302,11 +281,17 @@ fun DropdownMenuItem(
     )
 }
 
+@Composable
+fun ShowSuccessMessage(){
+    Text(
+        text = "Donation Successfully Submitted",
+        color = Color.Green,
+        modifier = Modifier.padding(8.dp),
+    )
+}
+
 @Preview
 @Composable
 fun DonateScreenPreview(){
     DonateScreen()
 }
-
-
-

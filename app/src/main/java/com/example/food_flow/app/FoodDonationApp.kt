@@ -17,8 +17,10 @@ import com.example.food_flow.screens.TermsAndConditionsScreen
 import com.example.food_flow.screens.SplashScreen
 import com.example.food_flow.screens.DonateScreen
 import com.example.food_flow.screens.FoodBankScreen
+import com.example.food_flow.screens.DonationsSubmittedScreen
 import com.example.food_flow.screens.ReceiveScreen
 import com.example.food_flow.screens.FoodMapScreen
+import com.example.food_flow.screens.ViewDonationsScreen
 
 
 @Composable
@@ -71,6 +73,13 @@ fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
                 is Screen.FoodMapScreen -> {
                     FoodMapScreen()
 
+                }
+
+                is Screen.DonationsSubmittedScreen -> {
+                    DonationsSubmittedScreen()
+                }
+                is Screen.ViewDonationsScreen -> {
+                    ViewDonationsScreen()
                 }
             }
         }
