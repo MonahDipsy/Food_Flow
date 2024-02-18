@@ -92,4 +92,11 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="Location">Choose Location</string>
     <string name="donationsubmitted">Submit Donation</string>
     <string name="showSuccessMessage">Donation Successful\n</string>
+    <string name="FoodBanklogin">"Food Bank "</string>
+    <string name="Credentials">Enter FoodBank Credentials</string>
+    <string name="TokenID">Enter Token ID</string>
+    <string name="verify">Verify Credentials</string>
+    <string name="ViewDonations">View Donations</string>
+    <string name="TrackDonations">Track Donations</string>
+    <string name="DonationRequests">Donation Requests</string>
 </resources>
