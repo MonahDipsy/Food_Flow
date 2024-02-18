@@ -19,7 +19,7 @@
     <string name="clickTocContinue">Get Started</string>
     <string name="TermsAndCs">
 
-Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App
+Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App \n
 Privacy Policy:
 
 Introduction:
@@ -87,7 +87,7 @@ These terms constitute the entire agreement between you and us regarding your us
 Contact Us:
 
 If you have any questions about these Terms of Use, please contact us at [email protected]</string>
-    <string name="WelcomeMessage">If you cannot feed a hundered people, then feed one.\nYour Donation counts and can make a difference!</string>
+    <string name="WelcomeMessage">If you cannot feed a hundred people, then feed one.\nYour Donation counts and can make a difference!</string>
     <string name="DonateWelcome">Donate Food Details</string>
     <string name="Location">Choose Location</string>
     <string name="donationsubmitted">Submit Donation</string>
