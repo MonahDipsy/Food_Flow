@@ -99,4 +99,5 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="ViewDonations">View Donations</string>
     <string name="TrackDonations">Track Donations</string>
     <string name="DonationRequests">Donation Requests</string>
+    <string name="DonationsRequest">View Donation Requests</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.food_flow.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import com.example.food_flow.navigation.SystemBackButtonHandler
 import com.example.food_flow.R
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun DonationsSubmittedScreen(){
@@ -27,17 +29,50 @@ fun DonationsSubmittedScreen(){
         modifier = Modifier.fillMaxSize(),
 
         ) {
-        ButtonComponent(
-            value = stringResource(id = R.string.ViewDonations),
-            onButtonClicked =  {Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)},
-            isEnabled = true
-        )
-    }
 
+        Column (
+            modifier = Modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+        ) {
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+            ButtonComponent(
+                value = stringResource(id = R.string.ViewDonations),
+                onButtonClicked =  {Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)},
+                isEnabled = true
+            )
+
+            Spacer(modifier =  Modifier.height(40.dp))
+
+            ButtonComponent(
+                value = stringResource(id = R.string.DonationsRequest),
+                onButtonClicked =  {Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)},
+                isEnabled = true
+            )
+
+            Spacer(modifier =  Modifier.height(40.dp))
+
+            ButtonComponent(
+                value = stringResource(id = R.string.TrackDonations),
+                onButtonClicked =  {Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)},
+                isEnabled = true
+            )
+        }
+
+    }
     SystemBackButtonHandler {
         Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
     }
-            }
+
+}
+
+
+
+
+
 
 
 
