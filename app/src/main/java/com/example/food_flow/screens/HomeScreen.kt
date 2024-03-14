@@ -9,8 +9,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,152 +23,100 @@ import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.food_flow.components.ImageCard
 
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(
+) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        // Gap between children = 26 dp
-        verticalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
+
+    Column {
 
         CardBorder()
 
-        // * Card with shape argument
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clickable {
-                    Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
-                },
-            shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation =  10.dp,
-            ),
-            content = {
-                Text("DONATE (Make a food donation)",
+        Row {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .padding(16.dp)
+            ) {
+                ImageCard(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(16.dp)
-                        .align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.labelLarge)
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                        },
+                    painter = painterResource(id = R.drawable.foodbank_icon),
+                    contentDescription = "DonateFood",
+                    title = "   Make Donation   "
+                )
             }
-        )
 
+            Spacer(modifier = Modifier.width(3.dp))
 
-        // * Card with background color argument
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clickable {
-                    Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)
-                },
-            //set background color of the card
-            elevation = CardDefaults.cardElevation(
-                defaultElevation =  10.dp,
-            ),
-            content = {
-                Text("REQUEST DONATION (Become a food beneficiary)",
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                ImageCard(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(16.dp)
-                        .align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.labelLarge)
-            }
-        )
-
-
-        // * Card with elevation
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clickable {
-                    Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
-                },
-            //set card elevation of the card
-            elevation = CardDefaults.cardElevation(
-                defaultElevation =  10.dp,
-            ),
-            content = {
-                Text("FOOD BANK (Only accessible to food bank admins)",
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.labelLarge)
-            }
-        )
-
-        // * Card with border argument
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .clickable {
-                    Food_FlowAppRouter.navigateTo(Screen.FoodMapScreen)
-                },
-            elevation = CardDefaults.cardElevation(
-                defaultElevation =  10.dp,
-            ),
-            content = {
-                Text("FOOD MAP (View available food banks)",
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .align(Alignment.CenterHorizontally),
-                    style = MaterialTheme.typography.labelLarge)
-            }
-        )
-
-
-        Card(
-            //shape = MaterialTheme.shapes.medium,
-            shape = RoundedCornerShape(8.dp),
-            // modifier = modifier.size(280.dp, 240.dp)
-            modifier = Modifier.padding(10.dp,5.dp,10.dp,10.dp),
-            //set card elevation of the card
-            elevation = CardDefaults.cardElevation(
-                defaultElevation =  10.dp,
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor =  MaterialTheme.colorScheme.primaryContainer,
-            ),
-        ) {
-            Column(modifier = Modifier.clickable(onClick = {  })) {
-
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = "If you cannot feed a hundred people, then feed one.\nYour Donation counts and can make a difference!\nContact Details",
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-
-                    Spacer(modifier = Modifier.height(5.dp))
-
-                    Text(
-                        text = "Phone: +254111229295 \nEmail: foodflow254@gmail.com",
-                        //maxLines = 1,
-                        //overflow = TextOverflow.Ellipsis,
-                        style = MaterialTheme.typography.titleSmall,
-                    )
-                }
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                        },
+                    painter = painterResource(id = R.drawable.foodbank_icon),
+                    contentDescription = "RequestFood",
+                    title = "Donation Request "
+                )
             }
         }
 
+        Row {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth(0.5f)
+                    .padding(16.dp)
+            ) {
+                ImageCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                        },
+                    painter = painterResource(id = R.drawable.foodbank_icon),
+                    contentDescription = "DonateFood",
+                    title = "  Food Bank Admin"
+                )
+            }
 
+            Spacer(modifier = Modifier.width(3.dp))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                ImageCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                        },
+                    painter = painterResource(id = R.drawable.foodbank_icon),
+                    contentDescription = "RequestFood",
+                    title = " View Food Banks "
+                )
+            }
+        }
 
     }
-
-
 }
-
-
-@Preview
 @Composable
 fun CardBorder(signupViewModel: SignupViewModel = viewModel()) {
     val firstName = signupViewModel.registrationUIState.value.firstName
@@ -200,7 +150,6 @@ fun CardBorder(signupViewModel: SignupViewModel = viewModel()) {
             ) {
                 Surface(
                     modifier = Modifier.wrapContentSize(),
-                    color = Color(0xFFC1B0DF)
                 )
                 {
 

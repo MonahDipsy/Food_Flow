@@ -35,15 +35,22 @@ import com.example.food_flow.ui.theme.TextColor
 import com.example.food_flow.ui.theme.ComponentShapes
 import com.example.food_flow.R
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
@@ -52,6 +59,7 @@ import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.SpanStyle
@@ -61,6 +69,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import com.example.food_flow.navigation.Food_FlowAppRouter
+import com.example.food_flow.navigation.Screen
 import com.example.food_flow.ui.theme.GrayColor
 import com.example.food_flow.ui.theme.Secondary
 
@@ -405,3 +415,61 @@ fun UnderlinedTextComponent(value: String) {
     )
 
 }
+
+@Composable
+fun ImageCard(
+    painter: Painter,
+    contentDescription: String,
+    title: String,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
+        // Gap between children = 26 dp
+        horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+
+        Card(
+            shape = RoundedCornerShape(15.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 5.dp,
+            )
+        )
+        {
+            Box(modifier = Modifier.height(180.dp))
+            {
+                Image(
+                    painter = painter,
+                    contentDescription = contentDescription,
+                    contentScale = ContentScale.Crop
+                )
+                
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black
+                            ),
+                            startY = 300f
+                        )
+                    )
+                )
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(12.dp),
+                    contentAlignment = Alignment.BottomStart
+                ) {
+                    Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
+                }
+            }
+        }
+    }
+}
+
