@@ -421,7 +421,7 @@ fun ImageCard(
     painter: Painter,
     contentDescription: String,
     title: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = Modifier
@@ -446,7 +446,7 @@ fun ImageCard(
                     contentDescription = contentDescription,
                     contentScale = ContentScale.Crop
                 )
-                
+
                 Box(modifier = Modifier
                     .fillMaxSize()
                     .background(
@@ -464,9 +464,10 @@ fun ImageCard(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(12.dp),
-                    contentAlignment = Alignment.BottomStart
+                    contentAlignment = Alignment.BottomCenter
                 ) {
-                    Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
+                    Text(title, style = TextStyle(fontSize = 16.sp))
+
                 }
             }
         }

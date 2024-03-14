@@ -3,17 +3,20 @@ package com.example.food_flow.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,203 +33,266 @@ import com.example.food_flow.components.ImageCard
 fun HomeScreen(
 ) {
 
+    Box(modifier = Modifier.fillMaxSize()){
+        Image(painter = painterResource(id = R.drawable.bg1),
+            contentDescription = "bg",
+            modifier = Modifier
+                .fillMaxSize()
+                .blur(6.dp),
+            contentScale = ContentScale.Crop
+
+        )
+    }
 
     Column {
 
         CardBorder()
 
-        Row {
+        Spacer(modifier = Modifier.height(18.dp))
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(3.dp)
+        ) {
+            // First Card
             Box(
                 modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(16.dp)
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                ImageCard(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
                         .clickable {
                             Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
                         },
-                    painter = painterResource(id = R.drawable.foodbank_icon),
-                    contentDescription = "DonateFood",
-                    title = "   Make Donation   "
-                )
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
+                ) {
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.five),
+                        contentDescription = "DonateFood",
+                        title = ""
+                    )
+                }
             }
 
+            // Spacer
             Spacer(modifier = Modifier.width(3.dp))
 
+            // Second Card
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                ImageCard(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
                         .clickable {
-                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                            Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)
                         },
-                    painter = painterResource(id = R.drawable.foodbank_icon),
-                    contentDescription = "RequestFood",
-                    title = "Donation Request "
-                )
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
+                ) {
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.reqone),
+                        contentDescription = "DonateFood",
+                        title = "   "
+                    )
+                }
             }
         }
 
-        Row {
+        // Spacer
+        Spacer(modifier = Modifier.height(3.dp))
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(3.dp)
+        ) {
+            // Third Card
             Box(
                 modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .padding(16.dp)
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                ImageCard(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
                         .clickable {
-                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                            Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
                         },
-                    painter = painterResource(id = R.drawable.foodbank_icon),
-                    contentDescription = "DonateFood",
-                    title = "  Food Bank Admin"
-                )
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
+                ) {
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.bank),
+                        contentDescription = "DonateFood",
+                        title = ""
+                    )
+                }
             }
 
+            // Spacer
             Spacer(modifier = Modifier.width(3.dp))
 
+            // Fourth Card
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
             ) {
-                ImageCard(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
                         .clickable {
-                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                            Food_FlowAppRouter.navigateTo(Screen.FoodMapScreen)
                         },
-                    painter = painterResource(id = R.drawable.foodbank_icon),
-                    contentDescription = "RequestFood",
-                    title = " View Food Banks "
-                )
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
+                ) {
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.location),
+                        contentDescription = "DonateFood",
+                        title = ""
+                    )
+                }
             }
         }
-
     }
+
+
 }
 @Composable
-fun CardBorder(signupViewModel: SignupViewModel = viewModel()) {
+fun CardBorder(
+    signupViewModel: SignupViewModel = viewModel(),
+
+
+) {
     val firstName = signupViewModel.registrationUIState.value.firstName
 
     Text(
         text = "Home Screen",
-        fontSize =  40.sp,
+        textAlign = TextAlign.Center,
+        fontSize = 40.sp,
         style = MaterialTheme.typography.titleLarge,
-        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        modifier = Modifier
+            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .fillMaxWidth()
     )
-    Surface(
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        border = BorderStroke(2.dp, Color.Black),
+
+    Box(
         modifier = Modifier
             .height(210.dp)
-            .padding(10.dp),
-        shadowElevation = 10.dp
+            .padding(10.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.primaryContainer,
+            border = BorderStroke(2.dp, Color.Black),
+            modifier = Modifier
+                .height(210.dp)
+                .padding(10.dp),
+            shadowElevation = 10.dp
         ) {
-
-
-            Column(
+            Row(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .weight(2f),
-                verticalArrangement = Arrangement.Center
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Surface(
-                    modifier = Modifier.wrapContentSize(),
-                )
-                {
+
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f),
+                    verticalArrangement = Arrangement.Center
+                ) {
 
                     Text(
                         text = "Hello Monicah Odipo, ", /*$firstName*/
-                        fontSize =  18.sp,
+                        fontSize = 18.sp,
                         style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(2.dp))
-
-                Text(text = "Donation Rating")
-
-                Spacer(modifier = Modifier.height(2.dp))
-
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "4.0",
-                        fontSize =  14.sp,
                         fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.titleLarge
+                        color = Color.Black
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
-                        tint = Color(0xFFF6B266),
-                        contentDescription = null
-                    )
+                    Spacer(modifier = Modifier.height(2.dp))
 
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
-                        tint = Color(0xFFF6B266),
-                        contentDescription = null
-                    )
+                    Text(text = "Donation Rating",    color = Color.Black)
 
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
-                        tint = Color(0xFFF6B266),
-                        contentDescription = null
-                    )
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_star_outline_24),
-                        tint = Color(0xFFF6B266),
-                        contentDescription = null
-                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "4.0",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    OutlinedButton(
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Black,
+                            containerColor = Color.White
+                        ),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Text(
+                            text = "Update Details",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
                 }
-
-                Spacer(modifier = Modifier.height(4.dp))
-
-                OutlinedButton(
-                    shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = Color.Black,
-                        containerColor = Color.White
-                    ),
-                    onClick = { /*TODO*/ }
+                Surface(
+                    shape = CircleShape,
+                    modifier = Modifier.size(width = 147.dp, height = 150.dp)
                 ) {
-                    Text(
-                        text = "Update Details",
-                        fontSize =  11.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.titleLarge
+                    Image(
+                        painter = painterResource(id = R.drawable.sponge),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = null
                     )
                 }
-            }
-
-            Surface(
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.size(width = 150.dp, height = 150.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.person),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null
-                )
             }
         }
     }
