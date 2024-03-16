@@ -17,7 +17,10 @@
     <string name="go_to">Already have an account? Login</string>
     <string name="forgot_password">Forgot your password?</string>
     <string name="clickTocContinue">Get Started</string>
+    <string name="pendingdonations">Pending Donations</string>
+    <string name="approveddonations">Approved Donations</string>
     <string name="TermsAndCs">
+
 
 Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App \n
 Privacy Policy:

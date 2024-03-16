@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -196,6 +197,7 @@ fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = deliveryPreference,
                 onValueChange = { deliveryPreference = it },
                 label = { Text("Any Special Instructions for Pickup/Delivery") },

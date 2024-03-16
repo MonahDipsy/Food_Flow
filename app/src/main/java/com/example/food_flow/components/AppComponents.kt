@@ -1,6 +1,7 @@
 package com.example.food_flow.components
 
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,12 +39,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.filled.*
@@ -54,6 +60,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
@@ -70,6 +79,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import com.example.food_flow.ui.theme.GrayColor
@@ -494,4 +505,130 @@ fun RoundedCornerOutlinedTextField(
         )
     }
 }
+@Composable
+fun CardBorder(
+    signupViewModel: SignupViewModel = viewModel(),
+
+
+    ) {
+    val firstName = signupViewModel.registrationUIState.value.firstName
+
+    Text(
+        text = "Home Screen",
+        textAlign = TextAlign.Center,
+        fontSize = 40.sp,
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier
+            .padding(vertical = 4.dp, horizontal = 8.dp)
+            .fillMaxWidth()
+    )
+
+    Box(
+        modifier = Modifier
+            .height(210.dp)
+            .padding(10.dp)
+    ) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.primaryContainer,
+            border = BorderStroke(2.dp, Color.Black),
+            modifier = Modifier
+                .height(210.dp)
+                .padding(10.dp),
+            shadowElevation = 10.dp
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(2f),
+                    verticalArrangement = Arrangement.Center
+                ) {
+
+                    Text(
+                        text = "Hello Monicah Odipo, ", /*$firstName*/
+                        fontSize = 18.sp,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Text(text = "Donation Rating", color = Color.Black)
+
+                    Spacer(modifier = Modifier.height(2.dp))
+
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "4.0",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    OutlinedButton(
+                        shape = RoundedCornerShape(8.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Color.Black,
+                            containerColor = Color.White
+                        ),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Text(
+                            text = "User Details",
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                    }
+                }
+                Surface(
+                    shape = CircleShape,
+                    modifier = Modifier.size(width = 147.dp, height = 150.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.sponge),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = null
+                    )
+                }
+            }
+        }
+
+    }
+}
+
+
 
