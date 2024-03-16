@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +33,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -55,9 +59,6 @@ import com.example.food_flow.components.ButtonComponent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
-
-
-
     var selectedCounty by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val counties = listOf(
@@ -88,31 +89,36 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                     estimateText.isNotBlank()
         }
     }
-    var donationSuccessful by remember { mutableStateOf(false) }
+        var donationSuccessful by remember { mutableStateOf(false) }
 
-    val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
+        val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
 
-
-
+         Box(modifier = Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(id = R.drawable.bg1),
+                contentDescription = "bg",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds
+            )
+        }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
-            .verticalScroll(rememberScrollState())
             .padding(28.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+       ) {
+
         HeadingTextComponent(value = stringResource(id = R.string.DonateWelcome))
 
         Spacer(modifier = Modifier.height(12.dp))
-
         Column(
 
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
         ) {
             OutlinedTextField(
 
@@ -137,7 +143,7 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                 onDismissRequest = { expanded = false },
                 modifier = Modifier
                     .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
-            )  {
+            ) {
                 counties.forEach { county ->
                     DropdownMenuItem(text = county, onClick = {
                         selectedCounty = county
@@ -159,7 +165,7 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             OutlinedTextField(
                 value = locationDetails,
                 onValueChange = { locationDetails = it },
-                label = { Text("Eg Migosi Area, Kenya Re Estate next to Lolwe") },
+                label = { Text("Eg Migosi Area, Kenya Re Estate") },
                 modifier = Modifier.fillMaxWidth(),
             )
 
@@ -268,7 +274,10 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
     SystemBackButtonHandler {
         Food_FlowAppRouter.navigateTo(Screen.HomeScreen)
     }
+
 }
+
+
 
 @Composable
 fun DropdownMenuItem(
@@ -292,6 +301,6 @@ fun ShowSuccessMessage(){
 
 @Preview
 @Composable
-fun DonateScreenPreview(){
+fun DonateScreenPreview() {
     DonateScreen()
 }

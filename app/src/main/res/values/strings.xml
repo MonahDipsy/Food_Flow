@@ -101,4 +101,5 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="DonationRequests">Donation Requests</string>
     <string name="DonationsRequest">View Donation Requests</string>
     <string name="RequestDonation">Request Donation</string>
+    <string name="submitrequest">Submit Request</string>
 </resources>
