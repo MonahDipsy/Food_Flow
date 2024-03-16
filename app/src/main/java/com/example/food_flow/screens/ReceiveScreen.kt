@@ -1,6 +1,7 @@
 package com.example.food_flow.screens
 
 import DonateViewModel
+import RequestViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -46,12 +47,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.food_flow.R
 import com.example.food_flow.components.ButtonComponent
 import com.example.food_flow.components.HeadingTextComponent
+import com.example.food_flow.components.RoundedCornerOutlinedTextField
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
 import com.example.food_flow.navigation.SystemBackButtonHandler
 
+
+
 @Composable
-fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
+fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
     
     var selectedCounty by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
@@ -67,24 +71,24 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
     )
 
 
-    var locationDetails by remember { mutableStateOf("") }
-    var foodText by remember { mutableStateOf("") }
-    var dateText by remember { mutableStateOf("") }
-    var timeText by remember { mutableStateOf("") }
-    var estimateText by remember { mutableStateOf("") }
+    var requestType by remember { mutableStateOf("") }
+    var requestPurpose by remember { mutableStateOf("") }
+    var deliveryPreference by remember { mutableStateOf("") }
+    var foodPreference by remember { mutableStateOf("") }
+    var contactNumber by remember { mutableStateOf("") }
 
     var textfieldSize by remember { mutableStateOf(Size.Zero) }
     val isSubmitEnabled by remember {
         derivedStateOf {
             selectedCounty.isNotBlank() &&
-                    locationDetails.isNotBlank() &&
-                    foodText.isNotBlank() &&
-                    dateText.isNotBlank() &&
-                    timeText.isNotBlank() &&
-                    estimateText.isNotBlank()
+                    requestType.isNotBlank() &&
+                    requestPurpose.isNotBlank() &&
+                    deliveryPreference.isNotBlank() &&
+                    foodPreference.isNotBlank() &&
+                    contactNumber.isNotBlank()
         }
     }
-    var donationSuccessful by remember { mutableStateOf(false) }
+    var requestSuccessful by remember { mutableStateOf(false) }
 
     val icon = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown
 
@@ -158,8 +162,8 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = locationDetails,
-                onValueChange = { locationDetails = it },
+                value = requestType,
+                onValueChange = { requestType = it },
                 label = { Text(text = "Enter 1 or 2")},
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -175,8 +179,8 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = foodText,
-                onValueChange = { foodText = it },
+                value = requestPurpose,
+                onValueChange = { requestPurpose = it },
                 label = { Text("Specify the reason for the request") },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -192,8 +196,8 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = dateText,
-                onValueChange = { dateText = it },
+                value = deliveryPreference,
+                onValueChange = { deliveryPreference = it },
                 label = { Text("Any Special Instructions for Pickup/Delivery") },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -209,8 +213,8 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
-                value = timeText,
-                onValueChange = { timeText = it },
+                value = foodPreference,
+                onValueChange = { foodPreference = it },
                 label = { Text("Types of Food Required") },
                 modifier = Modifier.fillMaxWidth(),
             )
@@ -226,11 +230,11 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
             )
 
             OutlinedTextField(
-                value = estimateText,
+                value = contactNumber,
                 onValueChange = { newValue ->
                     // Check if the value consists of only digits and the length is <= 9
                     if (newValue.length <= 9 && newValue.matches(Regex("\\d*"))) {
-                        estimateText = newValue
+                        contactNumber = newValue
                     }
                 },
                 label = { Text("+254") },
@@ -247,33 +251,35 @@ fun ReceiveScreen(donateViewModel: DonateViewModel = viewModel()){
                 value = stringResource(id = R.string.submitrequest),
                 onButtonClicked = {
                     if (isSubmitEnabled) {
-                        donateViewModel.submitDonation(
-                            locationDetails,
-                            dateText,
-                            timeText,
-                            estimateText,
-                            foodText,
+                        requestViewModel.submitRequest(
+                            requestType,
+                            foodPreference,
+                            deliveryPreference,
+                            contactNumber,
+                            requestPurpose,
                             selectedCounty
                         )
-                        donationSuccessful = true
+                        requestSuccessful = true
 
                         // Reset input fields
                         selectedCounty = ""
-                        locationDetails = ""
-                        foodText = ""
-                        dateText = ""
-                        timeText = ""
-                        estimateText = ""
+                        requestType = ""
+                        foodPreference = ""
+                        deliveryPreference = ""
+                        contactNumber = ""
+                        requestPurpose = ""
+                        selectedCounty = ""
                     }
                 },
                 isEnabled = isSubmitEnabled
             )
 
-            if (donationSuccessful) {
+            if (requestSuccessful) {
                 ShowSuccessMessage2()
             }
         }
     }
+
 
     SystemBackButtonHandler {
         Food_FlowAppRouter.navigateTo(Screen.HomeScreen)

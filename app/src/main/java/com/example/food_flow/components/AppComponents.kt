@@ -59,6 +59,7 @@ import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
@@ -471,6 +472,26 @@ fun ImageCard(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun RoundedCornerOutlinedTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    label: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    shape: Shape = RoundedCornerShape(8.dp) // Adjust the radius as needed
+) {
+    Box(modifier = modifier.clip(shape)) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier.fillMaxWidth(),
+            label = label,
+            trailingIcon = trailingIcon
+        )
     }
 }
 
