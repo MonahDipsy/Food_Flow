@@ -4,6 +4,7 @@ import DonateViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -24,7 +28,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -32,6 +38,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
@@ -41,9 +48,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -56,9 +65,13 @@ import com.example.food_flow.navigation.SystemBackButtonHandler
 import com.example.food_flow.R
 import com.example.food_flow.components.ButtonComponent
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
+
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val interactionSource = remember { MutableInteractionSource() }
+
     var selectedCounty by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     val counties = listOf(
@@ -76,7 +89,7 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
     var foodText by remember { mutableStateOf("") }
     var dateText by remember { mutableStateOf("") }
     var timeText by remember { mutableStateOf("") }
-    var estimateText by remember { mutableStateOf("") }
+    var contactNumber by remember { mutableStateOf("") }
 
     var textfieldSize by remember { mutableStateOf(Size.Zero) }
     val isSubmitEnabled by remember {
@@ -86,7 +99,8 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                     foodText.isNotBlank() &&
                     dateText.isNotBlank() &&
                     timeText.isNotBlank() &&
-                    estimateText.isNotBlank()
+                    contactNumber.isNotBlank()
+
         }
     }
         var donationSuccessful by remember { mutableStateOf(false) }
@@ -121,14 +135,10 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             verticalArrangement = Arrangement.Center,
         ) {
             OutlinedTextField(
-
+                shape = RoundedCornerShape(8.dp),
                 value = selectedCounty,
-                onValueChange = { selectedCounty = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onGloballyPositioned { coordinates ->
-                        textfieldSize = coordinates.size.toSize()
-                    },
+                onValueChange = { /* Disable direct text input */ },
+                readOnly = true, // Disable direct text input
                 label = { Text("Select County") },
                 trailingIcon = {
                     Icon(
@@ -136,8 +146,19 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                         contentDescription = "Dropdown Icon",
                         modifier = Modifier.clickable { expanded = !expanded }
                     )
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Transparent, // Hide cursor
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onGloballyPositioned { coordinates ->
+                        textfieldSize = coordinates.size.toSize()
+                    }
             )
+
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
@@ -163,10 +184,16 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = locationDetails,
                 onValueChange = { locationDetails = it },
                 label = { Text("Eg Migosi Area, Kenya Re Estate") },
                 modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -180,10 +207,16 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = foodText,
                 onValueChange = { foodText = it },
                 label = { Text("Food Item(s)") },
                 modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -197,11 +230,38 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = dateText,
-                onValueChange = { dateText = it },
-                label = { Text("Day/Month/2024") },
-                modifier = Modifier.fillMaxWidth(),
+                onValueChange = { newText ->
+                    if (newText.length <= 10) {
+                        val formattedText = newText.take(10).replace(Regex("[^\\d/]"), "")
+                        if (formattedText.length == 2 || formattedText.length == 5) {
+                            if (newText.length > dateText.length) {
+                                dateText = "$formattedText/"
+                            } else {
+                                dateText = formattedText.dropLast(1)
+                            }
+                        } else {
+                            dateText = formattedText
+                        }
+                    }
+                },
+                label = { Text("Day/Month/Year") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), // Set keyboard type to Number
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                ),
+                interactionSource = interactionSource,
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        keyboardController?.hide()
+                    }
+                ),
+                modifier = Modifier.fillMaxWidth()
             )
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -214,10 +274,16 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = timeText,
                 onValueChange = { timeText = it },
-                label = { Text("Time") },
+                label = { Text("Between 12 noon and 3pm") },
                 modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -227,15 +293,29 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
-                modifier = Modifier.padding(8.dp) // Add modifier
+                modifier = Modifier.padding(8.dp)
             )
 
             OutlinedTextField(
-                value = estimateText,
-                onValueChange = { estimateText = it },
-                label = { Text("+254") }, // Use Text composable for label
+                shape = RoundedCornerShape(8.dp),
+                value = contactNumber,
+                onValueChange = { newValue ->
+                    if (newValue.length <= 9 && newValue.matches(Regex("\\d*"))) {
+                        contactNumber = newValue
+                    }
+                },
+                label = { Text("+254") },
                 modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                ),
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                )
             )
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -247,7 +327,7 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                             locationDetails,
                             dateText,
                             timeText,
-                            estimateText,
+                            contactNumber,
                             foodText,
                             selectedCounty
                         )
@@ -259,7 +339,7 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                         foodText = ""
                         dateText = ""
                         timeText = ""
-                        estimateText = ""
+                        contactNumber = ""
                     }
                 },
                 isEnabled = isSubmitEnabled

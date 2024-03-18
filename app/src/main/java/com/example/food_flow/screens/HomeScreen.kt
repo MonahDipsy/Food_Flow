@@ -55,6 +55,11 @@ fun HomeScreen(
 
         CardBorder()
 
+        Spacer(modifier = Modifier.width(5.dp))
+
+        Spacer(modifier = Modifier.height(3.dp))
+
+
         OutlinedButton(
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
@@ -64,26 +69,7 @@ fun HomeScreen(
             onClick = { /*TODO*/ }
         ) {
             Text(
-                text = "View your pending donations",
-                fontSize = 13.sp,
-                fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-
-        Spacer(modifier = Modifier.height(3.dp)) // Space between buttons
-
-        // Button to view approved donations
-        OutlinedButton(
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color.Black,
-                containerColor = Color.White
-            ),
-            onClick = { /*TODO*/ }
-        ) {
-            Text(
-                text = "View your approved donations",
+                text = "You have made 1 approved donations",
                 fontSize = 13.sp,
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.titleLarge

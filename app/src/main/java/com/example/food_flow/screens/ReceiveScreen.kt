@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -40,6 +41,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -121,14 +123,10 @@ fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
             verticalArrangement = Arrangement.Center,
         ) {
             OutlinedTextField(
-
+                shape = RoundedCornerShape(8.dp),
                 value = selectedCounty,
-                onValueChange = { selectedCounty = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onGloballyPositioned { coordinates ->
-                        textfieldSize = coordinates.size.toSize()
-                    },
+                onValueChange = { /* Disable direct text input */ },
+                readOnly = true, // Disable direct text input
                 label = { Text("Select County") },
                 trailingIcon = {
                     Icon(
@@ -136,8 +134,19 @@ fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
                         contentDescription = "Dropdown Icon",
                         modifier = Modifier.clickable { expanded = !expanded }
                     )
-                }
+                },
+                colors = OutlinedTextFieldDefaults.colors(
+                    cursorColor = Color.Transparent, // Hide cursor
+                    focusedBorderColor = Color.Blue,
+                    unfocusedBorderColor = Color.Blue,
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onGloballyPositioned { coordinates ->
+                        textfieldSize = coordinates.size.toSize()
+                    }
             )
+
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
@@ -155,19 +164,35 @@ fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Type of Request\n1. Individual \n2. Organization/Community",
+                text = "Type of Request",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
             )
+            Text(
+            text = "1. Individual \n2. Organization/Community",
+            fontSize = 15.sp,
+            color = Color.Black,
+            )
+
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
                 value = requestType,
-                onValueChange = { requestType = it },
-                label = { Text(text = "Enter 1 or 2")},
+                onValueChange = { newText ->
+                    if (newText.length <= 1) {
+                        val formattedText = newText.takeLast(1).filter { it in '1'..'2' }
+                        requestType = formattedText
+                    }
+                },
+                label = { Text("Enter 1 or 2")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
                 modifier = Modifier.fillMaxWidth(),
             )
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -215,6 +240,7 @@ fun ReceiveScreen(requestViewModel: RequestViewModel = viewModel()){
             Spacer(modifier = Modifier.height(8.dp))
 
             OutlinedTextField(
+                shape = RoundedCornerShape(8.dp),
                 value = foodPreference,
                 onValueChange = { foodPreference = it },
                 label = { Text("Types of Food Required") },
