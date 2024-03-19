@@ -166,6 +166,18 @@ fun HomeScreen(
                                 title = ""
                             )
                         }
+
+                        Text(
+                            text = "Admin",
+                            style = TextStyle(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Red
+                            ),
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .padding(bottom = 8.dp)
+                        )
+
                     }
 
                     // Spacer
