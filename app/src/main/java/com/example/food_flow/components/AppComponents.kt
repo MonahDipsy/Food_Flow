@@ -619,7 +619,7 @@ fun CardBorder(
                     modifier = Modifier.size(width = 147.dp, height = 150.dp)
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.sponge),
+                        painter = painterResource(id = R.drawable.foodflowlogo),
                         contentScale = ContentScale.Crop,
                         contentDescription = null
                     )

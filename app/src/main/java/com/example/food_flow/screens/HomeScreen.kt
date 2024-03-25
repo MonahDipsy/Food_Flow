@@ -128,7 +128,7 @@ fun HomeScreen(
                             )
                         ) {
                             ImageCard(
-                                painter = painterResource(id = R.drawable.reqone),
+                                painter = painterResource(id = R.drawable.viewdon),
                                 contentDescription = "DonateFood",
                                 title = "   "
                             )
@@ -143,42 +143,45 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(3.dp)
                 ) {
                     // Third Card
+
                     Box(
                         modifier = Modifier
                             .weight(1f)
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
-                                },
-                            shape = RoundedCornerShape(15.dp),
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 5.dp,
-                            )
-                        ) {
-                            ImageCard(
-                                painter = painterResource(id = R.drawable.bank),
-                                contentDescription = "DonateFood",
-                                title = ""
+                        Column {
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
+                                    },
+                                shape = RoundedCornerShape(15.dp),
+                                elevation = CardDefaults.cardElevation(
+                                    defaultElevation = 5.dp,
+                                )
+                            ) {
+                                ImageCard(
+                                    painter = painterResource(id = R.drawable.bank),
+                                    contentDescription = "DonateFood",
+                                    title = ""
+                                )
+                            }
+                            Text(
+                                text = "(Admin)",
+                                style = TextStyle(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                    color = Color.Red
+                                ),
+                                modifier = Modifier
+                                    .padding(top = 8.dp)
+                                    .align(Alignment.CenterHorizontally)
                             )
                         }
-
-                        Text(
-                            text = "Admin",
-                            style = TextStyle(
-                                fontWeight = FontWeight.Bold,
-                                color = Color.Red
-                            ),
-                            modifier = Modifier
-                                .align(Alignment.BottomCenter)
-                                .padding(bottom = 8.dp)
-                        )
-
                     }
+
 
                     // Spacer
                     Spacer(modifier = Modifier.width(3.dp))

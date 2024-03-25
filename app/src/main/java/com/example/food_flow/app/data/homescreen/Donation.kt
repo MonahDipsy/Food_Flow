@@ -6,5 +6,8 @@ data class Donation(
     val time: String = "",
     val contactNumber: String = "",
     val foodItems: String = "",
-    val selectedCounty: String = ""
+    val selectedCounty: String = "",
+    val donorId: String = "",
+    val donationId: String = ""
 )
+

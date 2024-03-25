@@ -33,7 +33,7 @@ class DonateViewModel : ViewModel() {
         time: String,
         contactNumber: String,
         foodItems: String,
-        selectedCounty: String
+        selectedCounty: String,
     ) {
         val donationData = mapOf(
             "location" to location,

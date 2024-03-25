@@ -1,6 +1,9 @@
 package com.example.food_flow.screens
 
 import DonateViewModel
+import android.app.DatePickerDialog
+import android.content.Context
+import android.widget.DatePicker
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CutCornerShape
@@ -23,6 +27,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -47,6 +52,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
@@ -64,10 +70,13 @@ import com.example.food_flow.navigation.Screen
 import com.example.food_flow.navigation.SystemBackButtonHandler
 import com.example.food_flow.R
 import com.example.food_flow.components.ButtonComponent
+import java.util.Calendar
+import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
+
 
     val keyboardController = LocalSoftwareKeyboardController.current
     val interactionSource = remember { MutableInteractionSource() }
@@ -227,40 +236,26 @@ fun DonateScreen(donateViewModel: DonateViewModel = viewModel()) {
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
             )
-            Spacer(modifier = Modifier.height(8.dp))
+
+            showDatePicker(context = LocalContext.current) { selectedDate ->
+                dateText = selectedDate
+            }
 
             OutlinedTextField(
                 shape = RoundedCornerShape(8.dp),
                 value = dateText,
-                onValueChange = { newText ->
-                    if (newText.length <= 10) {
-                        val formattedText = newText.take(10).replace(Regex("[^\\d/]"), "")
-                        if (formattedText.length == 2 || formattedText.length == 5) {
-                            if (newText.length > dateText.length) {
-                                dateText = "$formattedText/"
-                            } else {
-                                dateText = formattedText.dropLast(1)
-                            }
-                        } else {
-                            dateText = formattedText
-                        }
-                    }
-                },
+                onValueChange = { },
+                readOnly = true, // Prevent typing in the field
                 label = { Text("Day/Month/Year") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), // Set keyboard type to Number
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                 colors = OutlinedTextFieldDefaults.colors(
                     cursorColor = Color.Black,
                     focusedBorderColor = Color.Blue,
                     unfocusedBorderColor = Color.Blue,
                 ),
-                interactionSource = interactionSource,
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        keyboardController?.hide()
-                    }
-                ),
                 modifier = Modifier.fillMaxWidth()
             )
+
 
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -379,8 +374,40 @@ fun ShowSuccessMessage(){
     )
 }
 
-@Preview
 @Composable
-fun DonateScreenPreview() {
-    DonateScreen()
+fun showDatePicker(context: Context, onDateSelected: (String) -> Unit) {
+
+    val year: Int
+    val month: Int
+    val day: Int
+
+    val calendar = Calendar.getInstance()
+    year = calendar.get(Calendar.YEAR)
+    month = calendar.get(Calendar.MONTH)
+    day = calendar.get(Calendar.DAY_OF_MONTH)
+    calendar.time = Date()
+
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            val selectedDate = "$dayOfMonth/${month + 1}/$year"
+            onDateSelected(selectedDate)
+        }, year, month, day
+    )
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center
+    ) {
+
+        Button(onClick = {
+            datePickerDialog.show()
+        }) {
+            Text(text = "Select Date")
+        }
+    }
 }
+
+
+
+

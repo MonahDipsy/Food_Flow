@@ -19,7 +19,10 @@
     <string name="clickTocContinue">Get Started</string>
     <string name="pendingdonations">Pending Donations</string>
     <string name="approveddonations">Approved Donations</string>
+    <string name="selectDate">Select Date</string>
+    <string name="myDonations">View Your Donations</string>
     <string name="TermsAndCs">
+
 
 
 Privacy Policy and Terms of Use Writeup for Food Donations and Redistribution Tracking App \n
@@ -95,14 +98,16 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="Location">Choose Location</string>
     <string name="donationsubmitted">Submit Donation</string>
     <string name="showSuccessMessage">Donation Successful\n</string>
-    <string name="FoodBanklogin">"Food Bank "</string>
+    <string name="FoodBanklogin">"Food Bank Admin"</string>
     <string name="Credentials">Enter FoodBank Credentials</string>
     <string name="TokenID">Enter Token ID</string>
     <string name="verify">Verify Credentials</string>
     <string name="ViewDonations">View Donations</string>
     <string name="TrackDonations">Track Donations</string>
-    <string name="DonationRequests">Donation Requests</string>
-    <string name="DonationsRequest">View Donation Requests</string>
+    <string name="DonationRequests">View Approved Donations</string>
+    <string name="DonationsRequest">View Approved Donations </string>
     <string name="RequestDonation">Request Donation</string>
     <string name="submitrequest">Submit Request</string>
+    <string name="bankName">Welcome Kenya FoodBank</string>
+    <string name="kenyafood">View your approved Food Donations</string>
 </resources>
