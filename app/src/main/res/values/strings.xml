@@ -105,9 +105,12 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="ViewDonations">View Donations</string>
     <string name="TrackDonations">Track Donations</string>
     <string name="DonationRequests">View Approved Donations</string>
-    <string name="DonationsRequest">View Approved Donations </string>
+    <string name="DonationsRequest">View Donations </string>
     <string name="RequestDonation">Request Donation</string>
     <string name="submitrequest">Submit Request</string>
     <string name="bankName">Welcome Kenya FoodBank</string>
     <string name="kenyafood">View your approved Food Donations</string>
+    <string name="FoodbankScreen">Food Bank Login</string>
+    <string name="confirmapproval">Confirm Donation Approval</string>
+    <string name="confirmrejection">Confirm Donation Rejection</string>
 </resources>

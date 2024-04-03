@@ -86,7 +86,7 @@ fun FoodBankScreen() {
     }
 
     SystemBackButtonHandler {
-        Food_FlowAppRouter.navigateTo(Screen.HomeScreen)
+        Food_FlowAppRouter.navigateTo(Screen.LoginScreen)
     }
 }
 

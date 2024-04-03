@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,6 +39,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
+
+
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -87,6 +92,22 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                     },
                     isEnabled = loginViewModel.allValidationsPassed.value
                 )
+
+                Spacer(modifier = Modifier.height(30.dp))
+
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Button(
+                        onClick = { Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen) },
+                        modifier = Modifier.padding(horizontal = 16.dp),
+
+                    ) {
+                        Text(text = "FoodBank Admin Login")
+                    }
+                }
+
 
                 Spacer(modifier = Modifier.height(20.dp))
 

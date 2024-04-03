@@ -8,6 +8,10 @@ data class Donation(
     val foodItems: String = "",
     val selectedCounty: String = "",
     val donorId: String = "",
-    val donationId: String = ""
+    val donationId: String = "",
+    val userEmail: String = "",
+    val id: String = "",
+    val status:String = ""
+
 )
 

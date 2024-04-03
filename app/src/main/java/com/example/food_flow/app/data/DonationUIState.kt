@@ -9,6 +9,9 @@ data class DonationUIState(
     var contactNumber: String = "",
     var foodItems: String = "",
     var selectedCounty: String = "",
+    val isLoading: Boolean = false,
+    val errorMessage: String? = null,
+    var userEmail: String = ""
 
 ) {
     val value: DonationUIValues
@@ -18,7 +21,8 @@ data class DonationUIState(
             time,
             contactNumber,
             foodItems,
-            selectedCounty
+            selectedCounty,
+            userEmail
         )
 }
 
@@ -29,4 +33,6 @@ data class DonationUIValues(
     val contactNumber: String,
     val foodItems: String,
     val selectedCounty: String,
+    val userEmail: String
 )
+

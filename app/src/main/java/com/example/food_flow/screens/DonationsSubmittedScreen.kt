@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.food_flow.components.ButtonComponent
 import com.example.food_flow.navigation.Food_FlowAppRouter
 import com.example.food_flow.navigation.Screen
@@ -51,17 +54,22 @@ fun DonationsSubmittedScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(40.dp))
-            ButtonComponent(
-                value = stringResource(id = R.string.DonationsRequest),
-                onButtonClicked = { Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen) },
-                isEnabled = true
-            )
+            Button(onClick = { Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)},
+          ) {
+                Text(text = "View your Donations",
+                modifier = Modifier.padding(12.dp),
+                color = Color.White,
+                fontSize = 18.sp)
+
+            }
             Spacer(modifier = Modifier.height(40.dp))
-            ButtonComponent(
-                value = stringResource(id = R.string.TrackDonations),
-                onButtonClicked = { Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen) },
-                isEnabled = true
-            )
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "Track Mapped Donations",
+                    modifier = Modifier.padding(12.dp),
+                    color = Color.White,
+                    fontSize = 18.sp)
+
+            }
         }
     }
 

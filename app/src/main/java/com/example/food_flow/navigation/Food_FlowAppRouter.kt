@@ -17,6 +17,7 @@ sealed class Screen {
     data object FoodMapScreen : Screen ()
     data object DonationsSubmittedScreen : Screen ()
     data object ViewDonationsScreen : Screen ()
+    data object RejectDonationScreen : Screen ()
 
 
 }

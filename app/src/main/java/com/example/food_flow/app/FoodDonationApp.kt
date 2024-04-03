@@ -20,6 +20,7 @@ import com.example.food_flow.screens.FoodBankScreen
 import com.example.food_flow.screens.DonationsSubmittedScreen
 import com.example.food_flow.screens.ReceiveScreen
 import com.example.food_flow.screens.FoodMapScreen
+import com.example.food_flow.screens.RejectDonationsScreen
 import com.example.food_flow.screens.ViewDonationsScreen
 
 
@@ -80,6 +81,10 @@ fun FoodDonationApp(homeViewModel: HomeViewModel = viewModel()) {
                 }
                 is Screen.ViewDonationsScreen -> {
                     ViewDonationsScreen()
+                }
+
+                is Screen.RejectDonationScreen ->{
+                    RejectDonationsScreen()
                 }
             }
         }

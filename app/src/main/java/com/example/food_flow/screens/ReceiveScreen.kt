@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import com.example.food_flow.components.HeadingTextComponent
-
 @Composable
 fun ReceiveScreen(receiveViewModel: ReceiveViewModel = viewModel()) {
     val donations = receiveViewModel.donations.value ?: emptyList()
@@ -55,17 +55,41 @@ fun ReceiveScreen(receiveViewModel: ReceiveViewModel = viewModel()) {
                         Text(text = "Pickup Date: ${donation.date}")
                         Text(text = "Pickup Time: ${donation.time}")
                         Text(text = "Contact Number: ${donation.contactNumber}")
-                        Text(text = "Donation Status: Pending Approval")
+                        Text(text = "User Email: ${donation.userEmail}")
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Button(
+                                onClick = {
+                                     Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)
+                                },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(end = 4.dp)
+                            ) {
+                                Text(text = "Accept Donation")
+                            }
+
+                            Button(
+                                onClick = {
+                                    Food_FlowAppRouter.navigateTo(Screen.RejectDonationScreen)
+                                },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 4.dp)
+                            ) {
+                                Text(text = "Reject Donation")
+                            }
+                        }
                     }
                 }
             }
         }
 
         SystemBackButtonHandler {
-            Food_FlowAppRouter.navigateTo(Screen.HomeScreen)
+            Food_FlowAppRouter.navigateTo(Screen.DonationsSubmittedScreen)
         }
     }
 }
-
-
-

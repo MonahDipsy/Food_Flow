@@ -24,8 +24,8 @@ class DataViewModel: ViewModel(){
     }
 }
 suspend fun getDataFromFireStore(): Donation {
-      val db = FirebaseFirestore.getInstance()
-      var donations = Donation()
+    val db = FirebaseFirestore.getInstance()
+    var donations = Donation()
 
     try {
         db.collection("donations").get().await().map{
@@ -36,7 +36,6 @@ suspend fun getDataFromFireStore(): Donation {
     } catch (e: FirebaseFirestoreException) {
         Log.d("error", "getDataFromFireStore: $e")
 
-}
+    }
     return donations
 }
-

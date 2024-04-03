@@ -30,9 +30,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.food_flow.ui.theme.BgColor
-import com.example.food_flow.ui.theme.Primary
-import com.example.food_flow.ui.theme.TextColor
 import com.example.food_flow.ui.theme.ComponentShapes
 import com.example.food_flow.R
 import androidx.compose.foundation.clickable
@@ -82,9 +79,12 @@ import androidx.compose.ui.text.withStyle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.navigation.Food_FlowAppRouter
-import com.example.food_flow.navigation.Screen
+import com.example.food_flow.ui.theme.BgColor
 import com.example.food_flow.ui.theme.GrayColor
+import com.example.food_flow.ui.theme.Primary
 import com.example.food_flow.ui.theme.Secondary
+import com.example.food_flow.ui.theme.TextColor
+
 
 @Composable
 fun NormalTextComponent(value: String) {
@@ -629,6 +629,5 @@ fun CardBorder(
 
     }
 }
-
 
 

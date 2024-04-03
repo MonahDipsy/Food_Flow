@@ -30,34 +30,31 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.food_flow.components.CardBorder
 import com.example.food_flow.components.ImageCard
 import com.example.food_flow.components.NormalTextComponent
+import com.example.food_flow.navigation.SystemBackButtonHandler
 
 
 @Composable
-fun HomeScreen(
-) {
-
-    Box(modifier = Modifier.fillMaxSize()){
-        Image(painter = painterResource(id = R.drawable.bg1),
+fun HomeScreen() {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.bg1),
             contentDescription = "bg",
             modifier = Modifier
                 .fillMaxSize()
                 .blur(6.dp),
             contentScale = ContentScale.Crop
-
         )
     }
 
-
-
-    Column (
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-    ){
+    ) {
 
         CardBorder()
 
         Spacer(modifier = Modifier.width(5.dp))
 
-        Spacer(modifier = Modifier.height(3.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
 
         OutlinedButton(
@@ -75,144 +72,73 @@ fun HomeScreen(
                 style = MaterialTheme.typography.titleLarge
             )
         }
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(3.dp)
+        
+        Spacer(modifier = Modifier.height(35.dp))
+        
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(3.dp)
+        ) {
+            // First Card
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
+                        },
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
                 ) {
-
-
-                    // First Card
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    Food_FlowAppRouter.navigateTo(Screen.DonateScreen)
-                                },
-                            shape = RoundedCornerShape(15.dp),
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 5.dp,
-                            )
-                        ) {
-                            ImageCard(
-                                painter = painterResource(id = R.drawable.five),
-                                contentDescription = "DonateFood",
-                                title = ""
-                            )
-                        }
-                    }
-
-                    // Spacer
-                    Spacer(modifier = Modifier.width(3.dp))
-
-                    // Second Card
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)
-                                },
-                            shape = RoundedCornerShape(15.dp),
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 5.dp,
-                            )
-                        ) {
-                            ImageCard(
-                                painter = painterResource(id = R.drawable.viewdon),
-                                contentDescription = "DonateFood",
-                                title = "   "
-                            )
-                        }
-                    }
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.five),
+                        contentDescription = "DonateFood",
+                        title = ""
+                    )
                 }
+            }
 
-                // Spacer
-                Spacer(modifier = Modifier.height(3.dp))
+            // Spacer
+            Spacer(modifier = Modifier.width(3.dp))
 
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(3.dp)
+            // Fourth Card
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            Food_FlowAppRouter.navigateTo(Screen.FoodMapScreen)
+                        },
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 5.dp,
+                    )
                 ) {
-                    // Third Card
-
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen)
-                                    },
-                                shape = RoundedCornerShape(15.dp),
-                                elevation = CardDefaults.cardElevation(
-                                    defaultElevation = 5.dp,
-                                )
-                            ) {
-                                ImageCard(
-                                    painter = painterResource(id = R.drawable.bank),
-                                    contentDescription = "DonateFood",
-                                    title = ""
-                                )
-                            }
-                            Text(
-                                text = "(Admin)",
-                                style = TextStyle(
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 16.sp,
-                                    color = Color.Red
-                                ),
-                                modifier = Modifier
-                                    .padding(top = 8.dp)
-                                    .align(Alignment.CenterHorizontally)
-                            )
-                        }
-                    }
-
-
-                    // Spacer
-                    Spacer(modifier = Modifier.width(3.dp))
-
-                    // Fourth Card
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable {
-                                    Food_FlowAppRouter.navigateTo(Screen.FoodMapScreen)
-                                },
-                            shape = RoundedCornerShape(15.dp),
-                            elevation = CardDefaults.cardElevation(
-                                defaultElevation = 5.dp,
-                            )
-                        ) {
-                            ImageCard(
-                                painter = painterResource(id = R.drawable.location),
-                                contentDescription = "DonateFood",
-                                title = ""
-                            )
-                        }
-                    }
+                    ImageCard(
+                        painter = painterResource(id = R.drawable.location),
+                        contentDescription = "DonateFood",
+                        title = ""
+                    )
                 }
             }
         }
+    }
+
+    SystemBackButtonHandler {
+        Food_FlowAppRouter.navigateTo(Screen.LoginScreen)
+    }
+}
+
 
 
