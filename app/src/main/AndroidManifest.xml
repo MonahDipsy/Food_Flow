@@ -7,7 +7,6 @@
     <uses-feature android:name="android.hardware.camera.any"/>
 
 
-
     <application
         android:name=".FoodFlowApp"
         android:allowBackup="true"
@@ -30,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="API" />
+
 
 
 

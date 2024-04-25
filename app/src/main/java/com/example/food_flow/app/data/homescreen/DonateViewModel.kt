@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.food_flow.app.data.DonationUIState
 import com.example.food_flow.app.data.homescreen.Donation
+import com.example.food_flow.screens.FoodBank
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,7 +44,8 @@ class DonateViewModel(private val userEmail: String) : ViewModel() {
         contactNumber: String,
         foodItems: String,
         selectedCounty: String,
-        userEmail: String
+        userEmail: String,
+        selectedFoodBank: String
     ) {
         if (!validateData(location, contactNumber, foodItems)) {
             return
@@ -56,7 +58,8 @@ class DonateViewModel(private val userEmail: String) : ViewModel() {
             "contactNumber" to contactNumber,
             "foodItems" to foodItems,
             "selectedCounty" to selectedCounty,
-            "userEmail" to userEmail
+            "userEmail" to userEmail,
+            "selectedFoodBank" to selectedFoodBank
         )
 
         _donationInProgress.value = true
@@ -78,9 +81,7 @@ class DonateViewModel(private val userEmail: String) : ViewModel() {
     }
 
     private fun validateData(location: String, contactNumber: String, foodItems: String): Boolean {
-        // Implement your validation logic here
-        // Check if location, contact number, and food items are not empty
-        // You can also add more specific validations as needed
+
         if (location.isEmpty() || contactNumber.isEmpty() || foodItems.isEmpty()) {
             _donationUIState.value = _donationUIState.value.copy(errorMessage = "Please fill in all required fields")
             return false
@@ -89,3 +90,5 @@ class DonateViewModel(private val userEmail: String) : ViewModel() {
     }
 
 }
+
+

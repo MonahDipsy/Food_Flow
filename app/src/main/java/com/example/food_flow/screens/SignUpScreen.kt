@@ -83,7 +83,7 @@ fun SignUpScreen(signupViewModel: SignupViewModel = viewModel()) {
                 )
 
                 PasswordTextField(
-                    labelValue = stringResource(id = R.string.password),
+                    labelValue = stringResource(id = R.string.password08),
                     painterResource = painterResource(id = R.drawable.lock),
                     onTextSelected = {
                         signupViewModel.onEvent(SignupUIEvent.PasswordChanged(it))

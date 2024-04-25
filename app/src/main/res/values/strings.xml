@@ -112,5 +112,12 @@ If you have any questions about these Terms of Use, please contact us at [email 
     <string name="kenyafood">View your approved Food Donations</string>
     <string name="FoodbankScreen">Food Bank Login</string>
     <string name="confirmapproval">Confirm Donation Approval</string>
+    <string name="map">Track Mapped Donations</string>
     <string name="confirmrejection">Confirm Donation Rejection</string>
+    <string name="continueasdonor">CONTINUE AS FOOD DONOR</string>
+    <string name="continueasadmin">"CONTINUE AS FOOD BANK "</string>
+    <string name="password8">"Minimum 8 characters "</string>
+    <string name="password08">Password (8 characters min)</string>
+    <string name="FoodBanklogin1">Donations Reviewer</string>
+    <string name="FoodBanklogin11">Food Bank Login</string>
 </resources>

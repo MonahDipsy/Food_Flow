@@ -137,7 +137,7 @@ fun RejectDonationsScreen() {
                 modifier = Modifier.padding(10.dp),
             ) {
                 Text(
-                    text = "Send Email Approval",
+                    text = "Send Rejection Email",
                     modifier = Modifier.padding(10.dp),
                     color = Color.White,
                     fontSize = 15.sp
@@ -147,6 +147,6 @@ fun RejectDonationsScreen() {
     }
 
     SystemBackButtonHandler {
-        Food_FlowAppRouter.navigateTo(Screen.DonationsSubmittedScreen)
+        Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)
     }
 }

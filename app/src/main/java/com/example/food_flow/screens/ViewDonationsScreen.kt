@@ -148,6 +148,6 @@ fun ViewDonationsScreen() {
     }
 
     SystemBackButtonHandler {
-        Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)
+        Food_FlowAppRouter.navigateTo(Screen.ReceiveScreen)
     }
 }

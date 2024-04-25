@@ -45,7 +45,7 @@ fun FoodBankScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top  // Align contents to the top
         ){
-            HeadingTextComponent(value = stringResource(id = R.string.FoodBanklogin))
+            HeadingTextComponent(value = stringResource(id = R.string.FoodBanklogin11))
             Spacer(modifier = Modifier.height(20.dp))
             Box(
                 modifier = Modifier.size(200.dp),
@@ -86,7 +86,7 @@ fun FoodBankScreen() {
     }
 
     SystemBackButtonHandler {
-        Food_FlowAppRouter.navigateTo(Screen.LoginScreen)
+        Food_FlowAppRouter.navigateTo(Screen.SplashScreen)
     }
 }
 

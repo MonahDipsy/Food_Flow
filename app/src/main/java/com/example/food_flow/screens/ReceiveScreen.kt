@@ -22,6 +22,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import com.example.food_flow.components.HeadingTextComponent
@@ -55,7 +57,19 @@ fun ReceiveScreen(receiveViewModel: ReceiveViewModel = viewModel()) {
                         Text(text = "Pickup Date: ${donation.date}")
                         Text(text = "Pickup Time: ${donation.time}")
                         Text(text = "Contact Number: ${donation.contactNumber}")
-                        Text(text = "User Email: ${donation.userEmail}")
+                        Text(text = "Donor Email: ${donation.userEmail}")
+                        Text(
+                            text = "Status: **${
+                                if (donation.approved) {
+                                    "Approved"
+                                } else if (!donation.approved && donation.rejected) {
+                                    "Rejected"
+                                } else {
+                                    "Pending"
+                                }
+                            }**",
+                            style = TextStyle(fontWeight = FontWeight.Bold)
+                        )
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -63,7 +77,9 @@ fun ReceiveScreen(receiveViewModel: ReceiveViewModel = viewModel()) {
                         ) {
                             Button(
                                 onClick = {
-                                     Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)
+                                    Food_FlowAppRouter.navigateTo(Screen.ViewDonationsScreen)
+                                    donation.approved = true // Update status to approved
+                                    receiveViewModel.saveApprovedDonationToDatabase(donation) // Save to database
                                 },
                                 modifier = Modifier
                                     .weight(1f)
@@ -75,6 +91,7 @@ fun ReceiveScreen(receiveViewModel: ReceiveViewModel = viewModel()) {
                             Button(
                                 onClick = {
                                     Food_FlowAppRouter.navigateTo(Screen.RejectDonationScreen)
+                                    donation.rejected = true // Update status to rejected
                                 },
                                 modifier = Modifier
                                     .weight(1f)

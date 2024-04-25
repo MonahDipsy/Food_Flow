@@ -95,21 +95,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
 
                 Spacer(modifier = Modifier.height(30.dp))
 
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Button(
-                        onClick = { Food_FlowAppRouter.navigateTo(Screen.FoodBankScreen) },
-                        modifier = Modifier.padding(horizontal = 16.dp),
 
-                    ) {
-                        Text(text = "FoodBank Admin Login")
-                    }
-                }
-
-
-                Spacer(modifier = Modifier.height(20.dp))
 
                 DividerTextComponent()
 

@@ -1,6 +1,9 @@
 package com.example.food_flow.components
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -45,6 +48,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -56,15 +61,19 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.internal.enableLiveLiterals
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
@@ -76,14 +85,21 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.food_flow.app.data.NavigationItem
 import com.example.food_flow.app.data.signup.SignupViewModel
 import com.example.food_flow.navigation.Food_FlowAppRouter
+import com.example.food_flow.ui.theme.AccentColor
 import com.example.food_flow.ui.theme.BgColor
 import com.example.food_flow.ui.theme.GrayColor
 import com.example.food_flow.ui.theme.Primary
 import com.example.food_flow.ui.theme.Secondary
 import com.example.food_flow.ui.theme.TextColor
+import com.example.food_flow.ui.theme.WhiteColor
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 
 @Composable
@@ -512,12 +528,14 @@ fun CardBorder(
 
     ) {
     val firstName = signupViewModel.registrationUIState.value.firstName
+    val lastName = signupViewModel.registrationUIState.value.lastName
 
     Text(
         text = "Home Screen",
         textAlign = TextAlign.Center,
         fontSize = 40.sp,
         style = MaterialTheme.typography.titleLarge,
+        color = Color.White,
         modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .fillMaxWidth()
@@ -533,6 +551,7 @@ fun CardBorder(
             color = MaterialTheme.colorScheme.primaryContainer,
             border = BorderStroke(2.dp, Color.Black),
             modifier = Modifier
+                .fillMaxWidth()
                 .height(210.dp)
                 .padding(10.dp),
             shadowElevation = 10.dp
@@ -552,7 +571,7 @@ fun CardBorder(
                 ) {
 
                     Text(
-                        text = "Hello Monicah Odipo, ", /*$firstName*/
+                        text = "Hello $firstName$lastName",
                         fontSize = 18.sp,
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold,
@@ -566,7 +585,7 @@ fun CardBorder(
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
-                            text = "4.0",
+                            text = "5.0",
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
                             style = MaterialTheme.typography.titleLarge
@@ -589,6 +608,12 @@ fun CardBorder(
                             tint = Color(0xFFF6B266),
                             contentDescription = null
                         )
+                        Icon(
+                            painter = painterResource(id = R.drawable.baseline_star_outline_24),
+                            tint = Color(0xFFF6B266),
+                            contentDescription = null
+                        )
+
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_star_outline_24),
                             tint = Color(0xFFF6B266),
@@ -630,4 +655,141 @@ fun CardBorder(
     }
 }
 
+
+@Composable
+fun mapMarkerIcon(context: Context, @DrawableRes iconResourceId: Int): BitmapDescriptor {
+    val icon = bitmapDescriptorFromVector(context, iconResourceId)
+    requireNotNull(icon) { "Icon resource not found!" }
+    return icon
+}
+
+fun bitmapDescriptorFromVector(
+    context: Context,
+    vectorResId: Int
+): BitmapDescriptor? {
+    val drawable = ContextCompat.getDrawable(context, vectorResId) ?: return null
+    drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    val bitmap = Bitmap.createBitmap(
+        drawable.intrinsicWidth,
+        drawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
+    )
+    val canvas = android.graphics.Canvas(bitmap)
+    drawable.draw(canvas)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
+}
+
+@Composable
+fun NavigationDrawerHeader(value: String?) {
+    Box(
+        modifier = Modifier
+            .background(
+                Brush.horizontalGradient(
+                    listOf(Primary, Secondary)
+                )
+            )
+            .fillMaxWidth()
+            .height(180.dp)
+            .padding(32.dp)
+    ) {
+
+        NavigationDrawerText(
+            title = value?:stringResource(R.string.hello), 28.sp , AccentColor
+        )
+
+    }
+}
+
+@Composable
+fun NavigationDrawerBody(navigationDrawerItems: List<NavigationItem>,
+                         onNavigationItemClicked:(NavigationItem) -> Unit) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+
+        items(navigationDrawerItems) {
+            NavigationItemRow(item = it,onNavigationItemClicked)
+        }
+
+    }
+}
+
+@Composable
+fun NavigationItemRow(item: NavigationItem,
+                      onNavigationItemClicked:(NavigationItem) -> Unit) {
+
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                onNavigationItemClicked.invoke(item)
+            }.padding(all = 16.dp)
+    ) {
+
+        Icon(
+            imageVector = item.icon,
+            contentDescription = item.description,
+        )
+
+        Spacer(modifier = Modifier.width(18.dp))
+
+        NavigationDrawerText(title = item.title, 18.sp, Primary)
+
+
+    }
+}
+
+@Composable
+fun NavigationDrawerText(title: String, textUnit: TextUnit, color: Color) {
+
+    val shadowOffset = Offset(4f, 6f)
+
+    Text(
+        text = title, style = TextStyle(
+            color = Color.Black,
+            fontSize = textUnit,
+            fontStyle = FontStyle.Normal,
+            shadow = Shadow(
+                color = Primary,
+                offset = shadowOffset, 2f
+            )
+        )
+    )
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppToolbar(
+    toolbarTitle: String, logoutButtonClicked: () -> Unit,
+    navigationIconClicked: () -> Unit
+) {
+
+    TopAppBar(
+        title = {
+            Text(
+                text = toolbarTitle, color = WhiteColor
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = {
+                navigationIconClicked.invoke()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = stringResource(R.string.hello),
+                    tint = WhiteColor
+                )
+            }
+
+        },
+        actions = {
+            IconButton(onClick = {
+                logoutButtonClicked.invoke()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Logout,
+                    contentDescription = stringResource(id = R.string.hello),
+                )
+            }
+        }
+    )
+}
 

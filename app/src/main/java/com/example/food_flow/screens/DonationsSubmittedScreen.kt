@@ -63,7 +63,7 @@ fun DonationsSubmittedScreen() {
 
             }
             Spacer(modifier = Modifier.height(40.dp))
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { Food_FlowAppRouter.navigateTo(Screen.MappedDonationsScreen)}) {
                 Text(text = "Track Mapped Donations",
                     modifier = Modifier.padding(12.dp),
                     color = Color.White,

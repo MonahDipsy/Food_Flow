@@ -7,11 +7,10 @@ data class Donation(
     val contactNumber: String = "",
     val foodItems: String = "",
     val selectedCounty: String = "",
-    val donorId: String = "",
-    val donationId: String = "",
+    val selectedFoodBank: String = "",
     val userEmail: String = "",
-    val id: String = "",
-    val status:String = ""
+    var approved: Boolean = false,
+    var rejected: Boolean = false
 
 )
 
